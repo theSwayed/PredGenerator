@@ -1,0 +1,19 @@
+{
+  "insideTongue":[
+    {"obj":"细长"},
+    {"obj":"肥厚"},
+    {"obj":"如蟒"}
+  ],
+  "insideTongueStatus":[
+    {"obj":"灵活"},
+    {"obj":"有力"}
+  ],
+  "insideGastricCapacity":[
+    {"obj":"偏小"},
+    {"obj":"正常"},
+    {"obj":"偏大"},
+    {"obj":"极大"},
+    {"obj":"夸张"},
+    {"obj":"无法填满"}
+  ]
+}

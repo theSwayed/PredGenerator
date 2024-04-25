@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="dd47cb13-f12f-4c03-b7d7-777ac5aeb646" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Character_Generator_DB.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/agerf.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/box.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/box.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/box.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/db.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/echarts.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/map.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/stand.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/tool.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/base.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/body.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/dress.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/inside.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/soul.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="package.json" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="D:\App\phpstudy_pro\Extensions\php\php8.2.9nts\php.exe" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2dm3hyol2DXcnC9Z4NCUMEdTxIU" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Code/Tools-Character-Generator/app",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.splitter.proportion": "0.2570281",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Code\Tools-Character-Generator\app" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dd47cb13-f12f-4c03-b7d7-777ac5aeb646" name="Changes" comment="" />
+      <created>1710599550428</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1710599550428</updated>
+      <workItem from="1710599553245" duration="9880000" />
+      <workItem from="1710655741698" duration="46742000" />
+      <workItem from="1713791550110" duration="14816000" />
+      <workItem from="1713957055662" duration="134000" />
+      <workItem from="1713957195683" duration="9881000" />
+      <workItem from="1714009436519" duration="1389000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

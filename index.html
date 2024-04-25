@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta property="og:image" content="app/logo.png"/>
+    <title>角色设定生成器</title>
+    <meta name="keywords" content="角色设定生成器"/>
+    <meta name="description" content="角色设定生成器"/>
+    <meta name="viewport" content="width=device-width, initial-scale=0.5"/>
+    <link rel="icon" type="image/png" href="app/logo.png">
+    <link href="app/style.css" rel="stylesheet" type="text/css"/>
+    <script src="app/jquery.min.js"></script>
+    <script src="app/echarts.min.js"></script>
+    <script src="config.js"></script>
+    <script src="app/tool.js"></script>
+    <script src="app/db.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>角色设定生成器</h1>
+    <h4>Character Generator</h4>
+</div>
+<div class="container" id="warning"></div>
+<div class="container">
+    <div class="title">>_</div>
+    <ul class="block__list block__list_words">
+        <li>
+            姓名
+            <input type="text" id="CharacterName" style="width: 6rem;" value="">
+        </li>
+    </ul>
+    <div class="MaT2">
+        <a id="Rseed" href="javascript:;" class="block__list_words Bnt MaT1">随机生成</a>
+    </div>
+</div>
+<div class="container" id="content">
+    <div class="cardbox">
+        <div class="Cname"></div>
+        <div id="DNAout">
+            <div class="card bg_card P-T4 ">
+
+                <div class="BGtype2">
+
+                </div>
+                <div id="main" class="bg_card" style="">
+                    <div id="panel" style="width: 180px;height: 180px;"></div>
+                </div>
+            </div>
+
+            <div class="card bg_card MaT1 BGtype1"></div>
+        </div>
+    </div>
+</div>
+<div class="container" id="download">
+    <div class="MaT2">
+        <a id="downloadBtn" href="javascript:;" class="block__list_words Bnt MaT1">导出为图片</a>
+    </div>
+</div>
+
+<div>
+    <h3>
+        <a href='https://kumame.github.io/Tools/'>ToolBox</a>
+        Website create in 2020 , Maintainer
+        <a href='https://kumame.pw'>熊豆(kumame)</a>
+    </h3>
+</div>
+</body>
+
+<script>
+
+</script>
+</html>
