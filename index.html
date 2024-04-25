@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
+    <title>食者生成器</title>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta property="og:image" content="app/logo.png"/>
-    <title>角色设定生成器</title>
-    <meta name="keywords" content="角色设定生成器"/>
-    <meta name="description" content="角色设定生成器"/>
+    <meta property="og:image" content="app/img/logo.png"/>
+    <meta name="keywords" content="pred generator"/>
+    <meta name="description" content="pred generator"/>
     <meta name="viewport" content="width=device-width, initial-scale=0.5"/>
-    <link rel="icon" type="image/png" href="app/logo.png">
+    <link rel="icon" type="image/png" href="app/img/logo.png">
     <link href="app/style.css" rel="stylesheet" type="text/css"/>
-    <script src="app/jquery.min.js"></script>
-    <script src="app/echarts.min.js"></script>
+    <script src="app/js/jquery.min.js"></script>
+    <script src="app/js/echarts.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 <div class="container">
-    <h1>角色设定生成器</h1>
-    <h4>Character Generator</h4>
+    <h1>食者生成器</h1>
+    <h4>Pred Generator</h4>
 </div>
 <div class="container" id="warning"></div>
 <div class="container">
@@ -74,9 +74,8 @@
     </h3>
 </div>
 </body>
-
-<script src="config.js"></script>
-<script src="app/operation.js"></script>
-<script src="app/tool.js"></script>
-<script src="app/db.js"></script>
+<script src="app/config.js"></script>
+<script>
+    $.getScript('app/app.js')
+</script>
 </html>

@@ -10,27 +10,19 @@
         {"obj":"削瘦"},
         {"obj":"瘦骨如柴"},
         {"obj":"体型圆润"},
-        {"obj":"圆乎乎"},
+        {"obj":"婴儿肥"},
         {"obj":"曲线丰满"},
         {"obj":"凹凸有致"}
     ],
     "bodyColor":[
-        {"obj":"如古铜","Require":1},
-        {"obj":"如小麦","Require":1},
-        {"obj":"淡黄","Power":64,"Region":32},
+        {"obj":"如玉","Require":1},
+        {"obj":"偏麦","Require":1},
+        {"obj":"白皙","Require":1},
+        {"obj":"红润","Power":64,"Region":32},
         {"obj":"乳白","Require":1},
         {"obj":"雪白","Power":23,"Region":20},
         {"obj":"粉白","Power":46,"Region":11},
-        {"obj":"苍白","Power":53,"Region":90},
-        {"obj":"灰白","Power":89,"Region":81}
-    ],
-    "bodyPlace":[
-        {"obj":"颈部"},
-        {"obj":"胸部"},
-        {"obj":"腰部"},
-        {"obj":"腹部"},
-        {"obj":"背部"},
-        {"obj":"躯干多处"}
+        {"obj":"苍白","Power":53,"Region":90}
     ],
     "faceType":[
         {"obj":"圆脸"},
@@ -53,14 +45,6 @@
         {"obj":"唇上"},
         {"obj":"唇下"},
         {"obj":"下巴"}
-    ],
-    "faceBeard":[
-        {"obj":"山羊胡"},
-        {"obj":"羊排胡"},
-        {"obj":"八字胡"},
-        {"obj":"唇下胡"},
-        {"obj":"络腮胡"},
-        {"obj":"超长络腮胡"}
     ],
     "faceBrow":[
         {"obj":"细眉"},
@@ -127,12 +111,14 @@
         {"obj":"星光闪烁"},
         {"obj":"淡然"},
         {"obj":"困倦"},
-        {"obj":"疲惫"},
-        {"obj":"暗淡"},
+        {"obj":"黯淡"},
         {"obj":"哀愁"},
         {"obj":"忧伤"},
         {"obj":"怯懦"},
         {"obj":"冷漠"},
+        {"obj":"傲慢"},
+        {"obj":"戏谑"},
+        {"obj":"淡漠"},
         {"obj":"捉摸不透"},
         {"obj":"了无生气"}
     ],
@@ -211,7 +197,7 @@
         {"obj":"兰花紫","Camp":50},
         {"obj":"紫罗兰","Camp":30,"Power":87,"Region":22},
         {"obj":"紫水晶","Power":38,"Region":49},
-        {"obj":"薰衣草","Camp":40,"Power":36,"Region":72},
+        {"obj":"薰衣草紫","Camp":40,"Power":36,"Region":72},
         {"obj":"木槿紫","Camp":40},
         {"obj":"香芋紫","Camp":50,"Power":63,"Region":54},
         {"obj":"雪青色","Camp":60},
