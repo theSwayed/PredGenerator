@@ -1,5 +1,3 @@
-
-
 //筛选器
 //类型1：基本随机筛选
 function BOXfilter1(DBbox) {
@@ -47,6 +45,13 @@ function filterFromCamp(DBbox) {
     // 阵容决定？性格，态度，攻击目标
     var data = (JSON.parse(DBbox).filter(
             item => item.Require == 1 || item.Camp <= Character.camp.index)// 获取小于这个年龄的内容
+    );
+    return data[RandomInt(data.length)].obj;
+}
+//类型7：根据key value 随机
+function filterFroCondition(DBbox,key,value) {
+    var data = (JSON.parse(DBbox).filter(
+            item => item.Require === 1 ||  item[key] == value )// 获取小于这个年龄的内容
     );
     return data[RandomInt(data.length)].obj;
 }
@@ -101,4 +106,86 @@ function hslToRgb(h, s, l) {
     };
 
     return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+}
+
+// 专用，切割字符串用于拼接
+function splitString(input) {
+    // 匹配中文字符的正则表达式
+    const chineseRegex = /[\u4E00-\u9FA5]/;
+
+    let result = [];
+    let chart = "";
+    // 如果输入是中文，则拆分成1,2的形式
+    if (chineseRegex.test(input)) {
+        result.push(input.charAt(0));
+        for (let i = 1; i < input.length; i++) chart += input.charAt(i);
+        result.push(chart);
+    } else {
+        // 如果输入是英文，则拆分第一个单词
+        let words = input.split(" ");
+        result.push(words[0])
+        for (let i = 1; i < words.length; i++) chart += words[i] + " ";
+        result.push(chart);
+    }
+    return result;
+}
+
+/** 生成面板数值 */
+function generatePanelNumber(type, param) {
+    // 生成1到100的随机整数
+    var randomNumber = Math.floor(Math.random() * 100) + 1;
+    if (randomNumber === 0) randomNumber = 1;
+
+    // 将1到100的范围按照参数值进行映射，使参数值越小，生成的随机数范围越小
+    var scaledNumber = Math.floor(randomNumber * (param / 100));
+
+    if (scaledNumber > 50) scaledNumber /= 2;
+    scaledNumber = Math.ceil(scaledNumber / 10);
+    // 返回生成的随机数
+    let not_zero = false;
+    switch (type) {
+        case 'eat_speed':
+        case 'capacity':
+            not_zero = true;
+            break
+    }
+    if (not_zero && scaledNumber === 0) scaledNumber = 1;
+    return scaledNumber;
+}
+
+function hexToRgb(hex) {
+    // 将十六进制颜色转换为RGB颜色值
+    var r = parseInt(hex.substring(1, 3), 16);
+    var g = parseInt(hex.substring(3, 5), 16);
+    var b = parseInt(hex.substring(5, 7), 16);
+    return {r: r, g: g, b: b};
+}
+
+function rgbToHex(r, g, b) {
+    // 将RGB颜色值转换为十六进制颜色
+    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+
+function getComplementaryColor(hex) {
+    var rgb = hexToRgb(hex);
+    var complementaryRgb = {
+        r: 255 - rgb.r,
+        g: 255 - rgb.g,
+        b: 255 - rgb.b
+    };
+    return rgbToHex(complementaryRgb.r, complementaryRgb.g, complementaryRgb.b);
+}
+
+function generateRandomHeight(age) {
+    // 计算均值和标准差
+    let mean = 160; // 平均身高
+    let stdDev = 40; // 标准差
+
+    // 根据年龄调整身高的均值和标准差
+    let adjustedMean = mean + (30 - age) * 0.5; // 年龄越小，均值越低
+    let adjustedStdDev = stdDev + (30 - age) * 0.1; // 年龄越小，标准差越低
+
+    // 生成随机身高
+    let height = Math.ceil(adjustedMean + (Math.random() * 2 - 1) * adjustedStdDev);
+    return Math.max(heightMIN, Math.min(height, heightMAX));
 }

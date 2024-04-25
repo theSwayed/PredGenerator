@@ -9,17 +9,11 @@
 //-----------------------------------------------------------------------------
 
 //数据版本，至少比当前版本+1，用于更新浏览器本地储存的数据。
-DBversion = 1 ;
-
-
-//坐标图片尺寸
-var mapsize=250;
+DBversion = 1;
 
 //坐标阈值，影响选中点的范围容差，不建议过大也不建议小于5
 var ZBYZ = 10;
 
-//种族模块开关:1=开，0=关
-var RACE = 1;
 //混血概率，0 为关闭
 var hybrid = 70;
 //允许混血的界限  根据力量来，只有强大力量才允许混血
@@ -27,14 +21,108 @@ var hybridRF = 80;
 //允许混血的基底种族在数据库的位置
 var Embryo = 1;
 
-//身高(cm)以热带区域身高作为参考，会根据两极纬度进行计算，越接近寒冷地区越高
-var heightMIN= 145;
-var heightMAX= 181;
-//热带 位于数据库位置
-var REDAI = 3;
+//身高
+var heightMIN = 133;
+var heightMAX = 181;
 
 //异色瞳概率，根据RF坐标增加，0为关闭
 var EYCL123 = 0.4;
 
 //发色渐变、挑染概率，（Character.age,Power）根据Age减少或根据力量坐标增加，0为关闭
-var H_B_CG= [3,0.5] ;
+var H_B_CG = [3, 0.5];
+/** 面板初始化 */
+let chartDom;
+let myChart;
+
+/** 参数初始化 */
+let Character = {
+    name: '',
+    age: 0,// 年龄
+    camp: {// 阵营坐标
+        index: 0,
+        show: '',
+        left: 0,
+        right: 0,
+    },
+    power: {// 力量坐标
+        index: 0,
+        show: '',
+        level: 'E',
+    },
+    region: {// 区域坐标
+        id: 0,
+        index: 0,
+        show: '',
+    },
+    race: {
+        main: '',// 种族
+        main_id: 0,
+    },
+    race_mix: {
+        main: '',// 混血
+        main_id: 0,
+        mix_gant: 0,// 混血种族为巨灵族
+        mix_point: 0// 混血率
+    },
+    face: {
+        type: '',// 脸型
+        brow: '',// 眉毛
+        makeup: '',// 妆容
+        mouth: '',// 嘴
+        mouth_status: '',// 嘴状态
+    },
+    eyes: {
+        shape: '',// 眼型
+        look: '',// 眼神
+        color: '',// 眼瞳
+        diff: '',// 异瞳
+
+    },
+    hair: {
+        type: '',// 发形
+        length: '',// 发长
+        bangs: '',// 刘海
+        style: '',// 发刑
+        color: '',// 发色
+        gradient: '',// 渐变
+        highlight: '',// 挑染
+    },
+    body: {
+        height: 0,
+        unit: '',
+        color: '',
+        type: '',
+    },
+    soul: {
+        personal: '',
+        connect: '',
+        traits: '',
+        but: '',
+        skill: {
+            name: '',
+            desc: ''
+        },
+        hobby: '',
+        hunting: {
+            target: '',
+        }
+    },
+    dress: {
+        clothing: '',
+        weapon: {
+            name: "",
+            desc: "",
+        }
+    },
+    panel: {
+        appetite: 0,// 食欲
+        capacity: 0,// 胃容量
+        hidden_rate: 0,// 压缩率
+        toughness: 0,// 韧性
+        digest_speed: 0,// 消化速度
+        absorb_rate: 0,// 吸收率
+    },
+    panel_settings: {
+        color: '#F9713C',
+    }
+};

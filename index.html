@@ -12,10 +12,7 @@
     <link href="app/style.css" rel="stylesheet" type="text/css"/>
     <script src="app/jquery.min.js"></script>
     <script src="app/echarts.min.js"></script>
-    <script src="config.js"></script>
-    <script src="app/tool.js"></script>
-    <script src="app/db.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -27,38 +24,48 @@
     <div class="title">>_</div>
     <ul class="block__list block__list_words">
         <li>
-            姓名
-            <input type="text" id="CharacterName" style="width: 6rem;" value="">
+            <label for="CharacterName">姓名</label>
+            <input type="text" id="CharacterName" style="width: 10rem;">
         </li>
     </ul>
     <div class="MaT2">
-        <a id="Rseed" href="javascript:;" class="block__list_words Bnt MaT1">随机生成</a>
+        <a id="generate" href="javascript:;" class="block__list_words Bnt MaT1">随机生成</a>
     </div>
 </div>
 <div class="container" id="content">
-    <div class="cardbox">
-        <div class="Cname"></div>
-        <div id="DNAout">
-            <div class="card bg_card P-T4 ">
-
-                <div class="BGtype2">
-
-                </div>
-                <div id="main" class="bg_card" style="">
-                    <div id="panel" style="width: 180px;height: 180px;"></div>
-                </div>
+    <div class="switch_tab">
+        <div class="on" data-target="simple">基础</div>
+        <div data-target="panel">面板</div>
+        <div data-target="tag">词条</div>
+    </div>
+    <div class="cardbox" id="download_content">
+        <div class="Cname">
+            <div class="first"></div>
+            <div class="last"></div>
+        </div>
+        <div id="screen-simple" class="screen screen-simple active">
+            <div class="card bg_card P-T4 desc1"></div>
+            <div class="card bg_card MaT1 desc2"></div>
+        </div>
+        <div id="screen-panel" class="screen screen-panel bg_card">
+            <div id="info-panel" class="card P-T4 desc1">
             </div>
-
-            <div class="card bg_card MaT1 BGtype1"></div>
+            <div id="stand-panel">
+                <div id="panel" style="width: 250px;height: 250px;"></div>
+            </div>
+        </div>
+        <div id="screen-tag" class="screen screen-tag bg_card">
+            <div id="info-tag" class="card P-T4 desc1">
+            </div>
         </div>
     </div>
 </div>
 <div class="container" id="download">
     <div class="MaT2">
         <a id="downloadBtn" href="javascript:;" class="block__list_words Bnt MaT1">导出为图片</a>
+        <a id="copyContent" href="javascript:;" class="block__list_words Bnt MaT1">复制提示词</a>
     </div>
 </div>
-
 <div>
     <h3>
         <a href='https://kumame.github.io/Tools/'>ToolBox</a>
@@ -68,7 +75,8 @@
 </div>
 </body>
 
-<script>
-
-</script>
+<script src="config.js"></script>
+<script src="app/operation.js"></script>
+<script src="app/tool.js"></script>
+<script src="app/db.js"></script>
 </html>

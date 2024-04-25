@@ -15,98 +15,19 @@
 var Race = "";
 let pngName = "";
 
-let Character = {
-    name: '',
-    age: 0,// 年龄
-    camp: {// 阵营坐标
-        index: 0,
-        show: '',
-        left: 0,
-        right: 0,
-    },
-    power: {// 力量坐标
-        index: 0,
-        show: '',
-        level: 'E',
-    },
-    region: {// 区域坐标
-        index: 0,
-        show: '',
-    },
-    race: {
-        main: '',// 种族
-        main_id: 0,
-    },
-    race_mix: {
-        main: '',// 混血
-        main_id: 0,
-        mix_gant: 0,// 混血种族为巨人
-        mix_point: 0// 混血率
-    },
-    face: {
-        type: '',// 脸型
-        brow: '',// 眉毛
-        makeup: '',// 妆容
-        mouth: '',// 嘴
-        mouth_status: '',// 嘴状态
-    },
-    eyes: {
-        shape: '',// 眼型
-        look: '',// 眼神
-        color: '',// 眼瞳
-        diff: '',// 异瞳
-
-    },
-    hair: {
-        type: '',// 发形
-        length: '',// 发长
-        bangs: '',// 刘海
-        style: '',// 发刑
-        color: '',// 发色
-        gradient: '',// 渐变
-        highlight: '',// 挑染
-    },
-    body: {
-        height: 0,
-        unit: '',
-        color: '',
-        type: '',
-    },
-    soul: {
-        personal: '',
-        connect: '',
-        traits: '',
-        but: '',
-        skill: {
-            name: '',
-            desc: ''
-        },
-        hobby: '',
-        hunting: {
-            target: '',
-        }
-    },
-    dress: {
-        clothing: '',
-        weapon: {
-            name: "",
-            desc: "",
-        }
-    },
-    panel: {
-        eat_speed: 0,// 吞噬速度
-        capacity: 0,// 胃容量
-        hidden_rate: 0,// 压缩率
-        toughness: 0,// 韧性
-        digest_speed: 0,// 消化速度
-        absorb_rate: 0,// 吸收率
-    },
-    panel_settings: {
-        color: '#F9713C',
+function initPred() {
+    let inputName = $('#CharacterName');
+    let firstName = $('.Cname .first');
+    let lastName = $('.Cname .last');
+    Character.name = inputName.val() ? inputName.val() : "神秘人";
+    let name = splitString(Character.name);
+    firstName.html(name[0]);
+    lastName.html("");
+    for (let i = 1; i < name.length; i++) {
+        if (name[i] === ',') lastName.append(" ");
+        else lastName.append(name[i]);
     }
-};
-//随机生成
-$("#Rseed").click(function () {
+
     setAge();// 设置年龄
     const randomData = [];
     for (let i = 0; i < 3; i++) {
@@ -120,7 +41,6 @@ $("#Rseed").click(function () {
     setPower();// 设置力量
     setRegion();// 设置区域
 
-
     // 设置身体
     setBody();
     // 设置脸部
@@ -131,68 +51,91 @@ $("#Rseed").click(function () {
     setDress();
 
     let X = Character.age;
-    if (Character.age > 100) {
-        X = parseInt(Character.age / 10)
-    }
+    if (Character.age > 100) X = parseInt(Character.age / 10)
 
-    Character.panel_settings.color = hslToRgb(((X + Character.camp.index) * 1.8 +30) / 360, ((Character.camp.index - 50) * 0.1 + 30 +30) / 100, ((X - 50) * 0.1 + 50 +30) / 100);
+    setBackground(X, Character.camp.index);
 
     setPanel();
 
-    DNAmix();
-    BoxBG(X, Character.camp.index);
+}
 
-    $("#content").show()
-    $("#download").show()
-});
-
-$("#downloadBtn").click(function () {
-    pngName = Character.name + "，" + Character.age + "岁的" + Character.race.main + getCall();
-    html2canvas($("#content"), {
-        onrendered: function (canvas) {
-            var imgData = canvas.toDataURL('image/png');
-            var link = document.createElement('a');
-            link.download = pngName + '.png';
-            link.href = imgData;
-            link.click();
-        }
-    });
-});
+function generate() {
+    simpleGenerate();
+    panelGenerate();
+    tagGenerate();
+}
 
 var DBPower = JSON.parse(localStorage.power);
 var DBRegion = JSON.parse(localStorage.region);
 var DBRace = JSON.parse(localStorage.race);
 
-//因子混合
-function DNAmix() {
-    //web自定义设置，不用删除 -->
-    RACE = 1; // 启用种族
-    hybrid = 100;// 混血概率
-    EYCL123 = 0.4; // 异瞳概率，%
-    Character.name = $('#CharacterName').val() ? $('#CharacterName').val() : "神秘人";
-    $('.Cname').html(Character.name);
-    //web自定义设置 * 结束 <--
-
+function simpleGenerate() {
     //输出
     let DNA1html =
-        `<p>一位有着<u>${Character.power.show}</u>魔力，来自<u>${Character.region.show}</u>的<u>${Character.age}</u>岁<u>${Character.race.main}</u>${getCall()}。</p>
+        `<p>一位有着<u>${Character.power.show}</u>魔力，来自<u>${Character.region.show}</u>的<u>${Character.race.main}</u>${getCall()}。</p>
         <p>身高<u>${Character.body.height}</u>${Character.body.unit}，肤色<u>${Character.body.color}</u>，<u>${Character.body.type}</u>，有着一张<u>${Character.face.type}</u>。</p>
         <p>${getEyesStr()}<u>${Character.eyes.shape}</u>，<u>${Character.face.brow}</u>，目光<u>${Character.eyes.look}</u>。</p>
         <p><u>${Character.face.mouth}${Character.face.mouth_status}</u>，妆容<u>${Character.face.makeup}</u>。</p>
         <p>一头${getHairStr()}的<u>${Character.hair.length}${Character.hair.type}</u>梳成<u>${Character.hair.bangs}</u>的<u>${Character.hair.style}</u>。</p>
         <p>身着<u>${Character.dress.clothing}</u>。</p>
-        <p>常用的武器是<u>${Character.dress.weapon.name}</u>。</p>
-        <p><u>${Character.dress.weapon.desc}</u>。</p>
         `
     let DNA2html = ` 
-        <p>行为倾向于<u>${Character.camp.show}</u>，性格<u>${Character.soul.personal}</u>${Character.soul.connect}<u>${Character.soul.traits}</u>。</p>
-        <p>天赋序列：<u>${Character.soul.skill.name}</u></p>
-        <p>序列描述：<u>${Character.soul.skill.desc}</u>。</p>
-        <p>爱好：<u>${Character.soul.hobby}</u></p>
-        <p>更倾向于将<u>${Character.soul.hunting.target}</u>视为自己的猎物。</p>`;
-    $("#DNAout .BGtype2").html(DNA1html);
-    $("#DNAout .BGtype1").html(DNA2html);
+        <p>行为倾向于<u>${Character.camp.show}</u>，喜欢<u>${Character.soul.hobby}</u>。</p>
+        <p>性格<u>${Character.soul.personal}</u>${Character.soul.connect}<u>${Character.soul.traits}</u>。</p>
+        <p>更倾向于将<u>${Character.soul.hunting.target}</u>视为自己的猎物。</p>
+        <p>天赋序列是<u>${Character.soul.skill.name} ${Character.soul.skill.desc}</u>。</p>
+        <p>拥有器魔<u>${Character.dress.weapon.name}</u>，<u>${Character.dress.weapon.desc}</u>。</p>
+`;
+    $("#screen-simple .desc1").html(DNA1html);
+    $("#screen-simple .desc2").html(DNA2html);
+}
 
+function panelGenerate() {
+    let DNA1html = `
+        <div style="width: 26em;">
+            <div style="display: inline-flex;">
+                <div>
+                    <p>种族：${Character.race.main}</p>
+                    <p>年龄：${Character.age}</p>
+                    <p>身高：${Character.body.height}${Character.body.unit}</p>
+                    <p>魔力量：${Character.power.show}</p>
+                </div>
+                <div>
+                    <p>势力：${Character.region.show}</p>
+                    <p>爱好：${Character.soul.hobby}</p>
+                    <p>阵营：${Character.camp.show}</p>
+                    <p>狩猎对象：${Character.soul.hunting.target}</p>
+                </div>
+            </div>
+            <p>性格：${Character.soul.personal}${Character.soul.connect}${Character.soul.traits}</p>
+        </div>
+        <br>
+        <p>眼眉：${getEyesStr()}${Character.eyes.shape}，${Character.face.brow}，神色${Character.eyes.look}</p>
+        <p>容貌：${Character.face.type}，${Character.face.mouth}，妆容${Character.face.makeup}</p>
+        <p>发型：${getHairStr()}${Character.hair.length}${Character.hair.type} ${Character.hair.style}，${Character.hair.bangs}</p>
+        <p>身材：肤色${Character.body.color} ${Character.body.type}</p>
+        <p>穿着：${Character.dress.clothing}</p>
+        <br>
+        <p>天赋序列：${Character.soul.skill.name}</p>
+        <p>序列描述：${Character.soul.skill.desc}</p>
+        <p>器魔：${Character.dress.weapon.name}</p>
+        <p>效果：${Character.dress.weapon.desc}</p>
+        `
+    $("#info-panel").html(DNA1html);
+}
+
+function tagGenerate() {
+    let DNA1html = `
+        <p>[主体:0],1girl,${Character.race.main},${tagBody()},</p>
+        <p>[面部:0],${Character.face.type},${Character.face.brow},${Character.face.mouth},妆容${Character.face.makeup},</p>
+        <p>[眼睛:0],${getEyesStr()}眼睛,${Character.eyes.shape},${Character.face.brow},${Character.eyes.look},</p>
+        <p>[身材:0],皮肤${Character.body.color},体型${Character.body.type},D cup,</p>
+        <p>[穿着:0],${Character.dress.clothing},</p>
+        <p>[背景:0],${tagBackground()},</p>
+        <p>[动作:0],${tagPose()},</p>
+        <p>[角度:0],look at viewer,</p>
+        `
+    $("#info-tag").html(DNA1html);
 }
 
 function getCall() {
@@ -221,8 +164,7 @@ function getEyesStr() {
     }
 }
 
-
-// 随机获取年龄
+// 随机年龄
 function setAge() {
     let rand = RandomInt(10);
     let round = [];
@@ -278,8 +220,10 @@ function setPower() {
 function setRegion() {
     Character.region.index = RandomIntRound(1, 100);
     for (let i = 0; i < DBRegion.length; i++)
-        if (i === 0 ? Character.region.index <= DBRegion[i].LL : Character.region.index > DBRegion[i - 1].LL && Character.region.index <= DBRegion[i].LL)
+        if (i === 0 ? Character.region.index <= DBRegion[i].LL : Character.region.index > DBRegion[i - 1].LL && Character.region.index <= DBRegion[i].LL) {
             Character.region.show = DBRegion[i].obj;
+            Character.region.id = DBRegion[i].id;
+        }
 }
 
 // 获取种族
@@ -291,7 +235,7 @@ function setRace() {
         let RaceData = DBRace[RandomInt(DBRace.length)];
         Character.race_mix.main = RaceData.obj;
         Character.race_mix.id = RaceData.id;
-        if (Character.race_mix.main === '巨人') {
+        if (Character.race_mix.main === '巨灵族') {
             Character.race_mix.mix_gant = 1;
         }
         Character.race_mix.point = RandomIntRound(10, 50)
@@ -300,8 +244,8 @@ function setRace() {
 
 // 身高
 function setBody() {
-    Character.body.height = RandomIntRound(heightMIN, heightMAX);
-    if (Character.race.main !== '巨人')
+    Character.body.height = generateRandomHeight(Character.age);
+    if (Character.race.main !== '巨灵族')
         if (Character.race.mix_gant) {
             Character.body.height /= 50;
             Character.body.unit = "M";
@@ -367,79 +311,62 @@ function setDress() {
     Character.dress.weapon.desc = weapon_effects.obj;
 }
 
-
 function setPanel() {
     Character.panel.digest_speed = 0;
-    Character.panel.eat_speed = 0;
+    Character.panel.appetite = 0;
     Character.panel.toughness = 0;
     Character.panel.capacity = 0;
     Character.panel.absorb_rate = 0;
     Character.panel.hidden_rate = 0;
+    switch (Character.soul.hunting.target) {
+        case "巨灵族":
+            Character.panel.capacity = RandomIntRound(4, 5);
+            Character.panel.hidden_rate = RandomIntRound(3, 5);
+            break;
+        case "龙族":
+            Character.panel.capacity = RandomIntRound(3, 5);
+            Character.panel.hidden_rate = RandomIntRound(2, 5);
+            break;
+    }
     switch (Character.soul.skill.name) {
         case "生物压缩":
-            Character.panel.capacity = 5;
-            Character.panel.hidden_rate = 5;
+            Character.panel.capacity = Math.max(Character.panel.capacity, 5);
+            Character.panel.hidden_rate = Math.max(Character.panel.hidden_rate, 5);
             break;
         case "巨大化":
-            Character.panel.capacity = 5;
-            Character.panel.hidden_rate = 5;
+            Character.panel.capacity = Math.max(Character.panel.hidden_rate, 5);
+            Character.panel.hidden_rate = Math.max(Character.panel.hidden_rate, 5);
             break;
         case "饕餮":
-            Character.panel.capacity = 6;
-            Character.panel.hidden_rate = 6;
+            Character.panel.capacity = Math.max(Character.panel.hidden_rate, 6);
+            Character.panel.hidden_rate = Math.max(Character.panel.hidden_rate, 6);
             break;
         case "心如止水":
-            Character.panel.toughness = 5;
+            Character.panel.toughness = Math.max(Character.panel.hidden_rate, 5);
             break;
         case "负重者":
-            Character.panel.toughness = 5;
+            Character.panel.toughness = Math.max(Character.panel.hidden_rate, 5);
 
             break;
         case "捕食者":
-            Character.panel.digest_speed = 5;
+            Character.panel.digest_speed = Math.max(Character.panel.hidden_rate, 5);
             break;
         case "超负荷":
-            Character.panel.digest_speed = 5;
-            Character.panel.toughness = 5;
-            Character.panel.capacity = 5;
-            Character.panel.hidden_rate = 5;
+            Character.panel.digest_speed = Math.max(Character.panel.hidden_rate, 5);
+            Character.panel.toughness = Math.max(Character.panel.hidden_rate, 5);
+            Character.panel.capacity = Math.max(Character.panel.hidden_rate, 5);
+            Character.panel.hidden_rate = Math.max(Character.panel.hidden_rate, 5);
             break;
         case "钢铁武装":
             Character.panel.toughness = 5;
             break;
-
     }
-
-    function generateNumbers(type, param) {
-        // 生成1到100的随机整数
-        var randomNumber = Math.floor(Math.random() * 100) + 1;
-        if (randomNumber == 0) randomNumber = 1;
-
-        // 将1到100的范围按照参数值进行映射，使参数值越小，生成的随机数范围越小
-        var scaledNumber = Math.floor(randomNumber * (param / 100));
-
-        if (scaledNumber > 50) scaledNumber /= 2;
-        scaledNumber = Math.ceil(scaledNumber / 10);
-        console.log(Character.power.index, scaledNumber)
-        // 返回生成的随机数
-        let not_zero = false;
-        switch (type) {
-            case 'eat_speed':
-            case 'capacity':
-                not_zero = true;
-                break
-        }
-        if (not_zero && scaledNumber === 0) scaledNumber = 1;
-        return scaledNumber;
-    }
-
 
     let data = [];
     let indicator = [];
     for (let i in Character.panel) {
         if (!Character.panel[i]) {
-            console.log(i)
-            Character.panel[i] = generateNumbers(i, Character.power.index);
+            Character.panel[i] = generatePanelNumber(i, Character.power.index);
         }
         data.push(Character.panel[i])
         // data.push(6)
@@ -492,19 +419,19 @@ function highlight() {
         return "";
 }
 
-//修改生成颜色，不使用删除即可
-function BoxBG(X, Y) {
-    $('#box1, .bg_card').css("background-color", "hsl(" + (X + Y) * 1.8 + " " + ((Y - 50) * 0.1 + 30) + "% " + ((X - 50) * 0.1 + 50) + "%)");
+//修改生成颜色
+function setBackground(X, Y) {
+    let background_color = hslToRgb((X + Y) * 1.8 / 360, +((Y - 50) * 0.1 + 30) / 100, ((X - 50) * 0.1 + 50) / 100);
+    Character.panel_settings.color = background_color;
+    $('.bg_card').css("background-color", background_color);
     $('.card').css("color", "hsl(" + (X + Y) * 1.8 + " 66% 93%)");
-    $("#DNAout u").css("border-color", "hsl(" + (X + Y) * 1.8 + " 44% 70%)");
-    $("#DNAout em").css("background-color", "hsl(" + (X + Y) * 1.8 + " 30% 45%)");
-    $("#DNAout i").css("background-color", "hsl(" + (X + Y) * 1.8 + " 33% 54%)");
+    $("#screen u").css("border-color", "hsl(" + (X + Y) * 1.8 + " 44% 70%)");
+    $("#screen em").css("background-color", "hsl(" + (X + Y) * 1.8 + " 30% 45%)");
+    $("#screen i").css("background-color", "hsl(" + (X + Y) * 1.8 + " 33% 54%)");
+
+    let complementaryColor = getComplementaryColor(background_color);
+    $("#screen-panel").css('background', 'linear-gradient(to top right,' + background_color + ',' + complementaryColor + ')')
 }
-
-
-// 面板
-var chartDom = document.getElementById('panel');
-var myChart = echarts.init(chartDom);
 
 function setOptions(data, indicator) {
     return {
@@ -519,7 +446,7 @@ function setOptions(data, indicator) {
         radar: {
             indicator: indicator,
             shape: 'circle',
-            radius: 60,
+            radius: 71.5,
             splitNumber: 6,
             scale: false,// 是否是脱离 0 值比例。设置成 true 后坐标刻度不会强制包含零刻度。在双数值轴的散点图中比较有用。
             silent: true,
@@ -545,6 +472,7 @@ function setOptions(data, indicator) {
                 show: false
             },
             axisLine: {
+                show: false,
                 lineStyle: {
                     color: 'rgb(0,0,0)'
                 },
@@ -571,4 +499,36 @@ function setOptions(data, indicator) {
     };
 }
 
+function tagBody() {
+    let type = "";
+    let height = Character.body.height;
+    if (Character.body.unit === "M") height *= 100;
+    if (height > 200) {
+        type = "giantess";
+    } else if (height > 175) {
+        type = "tall";
+    } else if (height > 160) {
+        type = "normal height";
+    } else if (height > 150) {
+        type = "short height";
+    } else {
+        type = "loli, petite"
+    }
+    return type;
+}
 
+
+function tagPose() {
+    return BOXfilter1(localStorage.pose);// 姿势
+}
+
+
+function tagBackground() {
+    let baseBackground = BOXfilter1(localStorage.baseBackground);// 背景
+    let regionBackground = filterFroCondition(localStorage.regionBackground, 'region', Character.region.id);// 背景
+    return baseBackground + "," + regionBackground;
+}
+
+$(document).ready(function () {
+    $("#generate").click();
+})

@@ -19,13 +19,15 @@ $("document").ready(function () {
         DBload.push($.get('./db/soul.json'));
         DBload.push($.get('./db/inside.json'));
         DBload.push($.get('./db/dress.json'));
+        DBload.push($.get('./db/pose.json'));
         //json数据本地化处理
-        $.when.apply($, DBload).then(function (DB1, DB2, DB3, DB4, DB5) {
+        $.when.apply($, DBload).then(function (DB1, DB2, DB3, DB4, DB5, DB6) {
             makeLS(DB1);
             makeLS(DB2);
             makeLS(DB3);
             makeLS(DB4);
             makeLS(DB5);
+            makeLS(DB6);
 
             function makeLS(DBnum) {
                 let LStitle;
@@ -49,6 +51,5 @@ $("document").ready(function () {
 //载入程序
 function loadAPP() {
     $.getScript('app/app.js', function () {
-        //初始触发随机
     })
 }
