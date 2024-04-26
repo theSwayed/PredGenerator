@@ -21,6 +21,10 @@ var hybridRF = 80;
 //允许混血的基底种族在数据库的位置
 var Embryo = 1;
 
+let ageMin = 13;
+let ageMax = 29;
+let longevityAgeMax = 2500;
+
 //身高
 var heightMIN = 133;
 var heightMAX = 181;
@@ -28,7 +32,7 @@ var heightMAX = 181;
 //异色瞳概率，根据RF坐标增加，0为关闭
 var EYCL123 = 0.1;
 
-//发色渐变、挑染概率，（Character.age,Power）根据Age减少或根据力量坐标增加，0为关闭
+//发色渐变、挑染概率，（Character.age,power）根据Age减少或根据力量坐标增加，0为关闭
 var H_B_CG = [3, 0.5];
 /** 面板初始化 */
 let chartDom;
@@ -40,23 +44,33 @@ let Character = {
     age: 0,// 年龄
     camp: {// 阵营坐标
         index: 0,
-        show: '',
+        name: '',
         left: 0,
         right: 0,
     },
     power: {// 力量坐标
-        index: 0,
-        show: '',
-        level: 'E',
+        strength:{
+            index: 0,
+            show: '',
+            level: 'E',
+        }
     },
     region: {// 区域坐标
-        id: 0,
         index: 0,
-        show: '',
+        faction:{
+            id: 0,
+            name: '',
+        },
+        country:{
+            id: 0,
+            name: '',
+        }
     },
     race: {
-        main: '',// 种族
-        main_id: 0,
+        name: '',// 种族
+        id: 0,
+        size: 0,
+        longevity: 0,
     },
     race_mix: {
         main: '',// 混血

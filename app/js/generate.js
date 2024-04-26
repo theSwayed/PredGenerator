@@ -1,65 +1,42 @@
-
-var Race = "";
-let pngName = "";
-
 function initPred() {
-    let inputName = $('#CharacterName');
-    let firstName = $('.Cname .first');
-    let lastName = $('.Cname .last');
-    Character.name = inputName.val() ? inputName.val() : "神秘人";
-    let name = splitString(Character.name);
-    firstName.html(name[0]);
-    lastName.html("");
-    for (let i = 1; i < name.length; i++) {
-        if (name[i] === ',') lastName.append(" ");
-        else lastName.append(name[i]);
-    }
+    // 设置名字
+    setName();
+    // 设置种族，兼容上级数据，链式操作
+    setRegion();
 
-    setAge();// 设置年龄
-    const randomData = [];
-    for (let i = 0; i < 3; i++) {
-        randomData[i] = RandomIntRound(1, 100);
-    }
-    Character.camp.index = randomData[0];
-    Character.power.index = randomData[1];
-    Character.region.index = randomData[2];
-    setRace();// 设置种族
-    setCamp();// 设置阵营
-    setPower();// 设置力量
-    setRegion();// 设置区域
-
-    // 设置身体
-    setBody();
-    // 设置脸部
-    setFace();
-    // 设置灵魂
-    setSoul();
-    // 设置
-    setDress();
-
-    let X = Character.age;
-    if (Character.age > 100) X = parseInt(Character.age / 10)
-
-    setBackground(X, Character.camp.index);
-
-    setPanel();
+    // setAge();// 设置年龄
+    //
+    // setCamp();// 设置阵营
+    // setRegion();// 设置区域
+    //
+    // // 设置身体
+    // setBody();
+    // // 设置脸部
+    // setFace();
+    // // 设置灵魂
+    // setSoul();
+    // // 设置
+    // setDress();
+    //
+    // let X = Character.age;
+    // if (Character.age > 100) X = parseInt(Character.age / 10)
+    //
+    // setBackground(X, Character.camp.index);
+    //
+    // setPanel();
 
 }
 
 function generate() {
-    simpleGenerate();
-    panelGenerate();
-    tagGenerate();
+    // simpleGenerate();
+    // panelGenerate();
+    // tagGenerate();
 }
-
-var DBPower = JSON.parse(localStorage.power);
-var DBRegion = JSON.parse(localStorage.region);
-var DBRace = JSON.parse(localStorage.race);
 
 function simpleGenerate() {
     //输出
     let DNA1html =
-        `<p>一位有着<u>${Character.power.show}</u>魔力，来自<u>${Character.region.show}</u>的<u>${Character.race.main}</u>${getCall()}。</p>
+        `<p>一位有着<u>${Character.power.name}</u>魔力，来自<u>${Character.region.show}</u>的<u>${Character.race.name}</u>${getCall()}。</p>
         <p>身高<u>${Character.body.height}</u>${Character.body.unit}，肤色<u>${Character.body.color}</u>，<u>${Character.body.type}</u>，有着一张<u>${Character.face.type}</u>。</p>
         <p>${getEyesStr()}<u>${Character.eyes.shape}</u>，<u>${Character.face.brow}</u>，目光<u>${Character.eyes.look}</u>。</p>
         <p><u>${Character.face.mouth}${Character.face.mouth_status}</u>，妆容<u>${Character.face.makeup}</u>。</p>
@@ -82,10 +59,10 @@ function panelGenerate() {
         <div style="width: 26em;">
             <div style="display: inline-flex;">
                 <div>
-                    <p>种族：${Character.race.main}</p>
+                    <p>种族：${Character.race.name}</p>
                     <p>年龄：${Character.age}</p>
                     <p>身高：${Character.body.height}${Character.body.unit}</p>
-                    <p>魔力量：${Character.power.show}</p>
+                    <p>魔力量：${Character.power.name}</p>
                 </div>
                 <div>
                     <p>势力：${Character.region.show}</p>
@@ -113,7 +90,7 @@ function panelGenerate() {
 
 function tagGenerate() {
     let DNA1html = `
-        <p>[主体:0],1girl,solo,full body,${Character.race.main},${tagBody()},</p>
+        <p>[主体:0],1girl,solo,full body,${Character.race.name},${tagBody()},</p>
         <p>[面部:0],${Character.face.type},${Character.face.brow},${Character.face.mouth},妆容${Character.face.makeup},</p>
         <p>[眼睛:0],${getEyesStr()}眼睛,${Character.eyes.shape},${Character.face.brow},${Character.eyes.look},</p>
         <p>[身材:0],皮肤${Character.body.color},体型${Character.body.type},中等胸部,</p>
@@ -151,37 +128,32 @@ function getEyesStr() {
     }
 }
 
-// 随机年龄
-function setAge() {
-    let rand = RandomInt(10);
-    let round = [];
-    if (rand >= 1 && rand <= 7) {
-        round[0] = 12;
-        round[1] = 29;
-    } else if (rand >= 8 && rand <= 9) {
-        round[0] = 30;
-        round[1] = 490;
-    } else {
-        round[0] = 500;
-        round[1] = 1490;
+function setName() {
+    let inputName = $('#CharacterName');
+    let firstName = $('.Cname .first');
+    let lastName = $('.Cname .last');
+    Character.name = inputName.val() ? inputName.val() : "神秘人";
+    let name = splitString(Character.name);
+    firstName.html(name[0]);
+    lastName.html("");
+    for (let i = 1; i < name.length; i++) {
+        if (name[i] === ',') lastName.append(" ");
+        else lastName.append(name[i]);
     }
-    round[0] = 14;
-    round[1] = 29;
-    Character.age = RandomIntRound(round[0], round[1]);
 }
 
 // 阵营
 function setCamp() {
-    Character.camp.index = RandomIntRound(1, 100);
+    Character.camp.index = randomIntRound(1, 100);
 
     let DBCampLeft = JSON.parse(localStorage.campLeft);
     let DBCampRight = JSON.parse(localStorage.campRight);
     let left = '';
     let right = '';
     let campLeftData = DBCampLeft.find(camp => camp.LL <= Character.camp.index);
-    let campRightData = DBCampRight.find(camp => camp.LL <= RandomIntRound(1, 100));
-    left = campLeftData.obj;
-    right = campRightData.obj;
+    let campRightData = DBCampRight.find(camp => camp.LL <= randomIntRound(1, 100));
+    left = campLeftData.name;
+    right = campRightData.name;
 
     if (left === '中立' && right === '中立')
         Character.camp.show = "绝对中立";
@@ -193,46 +165,62 @@ function setCamp() {
     Character.camp.right = campRightData.LL;
 }
 
-//力量
-function setPower() {
-    Character.power.index = RandomIntRound(1, 100);
-    for (let i = 0; i < DBPower.length; i++)
-        if (i === 0 ? Character.power.index <= DBPower[i].LL : Character.power.index > DBPower[i - 1].LL && Character.power.index <= DBPower[i].LL) {
-            Character.power.show = DBPower[i].obj;
-            Character.power.level = DBPower[i].level;
-        }
-}
-
+/** 设置地区，势力，根据地区确定种族，根据种族的天赋上限设置力量等级 */
 //地区
 function setRegion() {
-    Character.region.index = RandomIntRound(1, 100);
-    for (let i = 0; i < DBRegion.length; i++)
-        if (i === 0 ? Character.region.index <= DBRegion[i].LL : Character.region.index > DBRegion[i - 1].LL && Character.region.index <= DBRegion[i].LL) {
-            Character.region.show = DBRegion[i].obj;
-            Character.region.id = DBRegion[i].id;
-        }
+    Character.region.index = randomIntRound(1, 100);
+    let faction = getStorage("region.faction");
+    faction = getDataRound(faction);
+
+    Character.region.faction.id = faction.id;
+    Character.region.faction.name = faction.name;
+
+    let country = getStorage("region.country");
+    country = getDataFind(country, "faction", faction.name);
+    country = getDataRound(country);
+    Character.region.country.id = country.id;
+    Character.region.country.name = country.name;
+    // 设置种族，兼容上级数据，链式操作
+    setRace(getDataRound(faction.raceType));
 }
 
 // 获取种族
-function setRace() {
-    let RaceData = filterFromAge(localStorage.race);
-    Character.race.main = RaceData.obj;
-    Character.race.id = RaceData.id;
-    if (hybrid >= RandomInt(100) && Character.power.index >= hybridRF && Race === DBRace[(Embryo - 1)].obj) {// 只允许人族与其他种族混血，不允许其他种族与其他种族混血
-        let RaceData = DBRace[RandomInt(DBRace.length)];
-        Character.race_mix.main = RaceData.obj;
-        Character.race_mix.id = RaceData.id;
-        if (Character.race_mix.main === '巨灵族') {
-            Character.race_mix.mix_gant = 1;
-        }
-        Character.race_mix.point = RandomIntRound(10, 50)
-    }
+function setRace(race_tag) {
+    let race = getStorage('race.' + race_tag);
+    race = getDataRound(race);
+    Character.race.id = race.id;
+    Character.race.name = race.name;
+    Character.race.longevity = race.longevity;
+    Character.race.size = race.size;
+    Character.race.level = race.level;
+    setStrength();
 }
+
+//力量
+function setStrength() {
+    let strength = getStorage('power.strength');
+    strength = getDataUnderScope(strength, 'level', Character.race.level);
+    strength = getDataRound(strength);
+    Character.power.strength.index = randomIntRound(strength.energyMin, strength.energyMax);
+    Character.power.strength.name = strength.name;
+    Character.power.strength.level = strength.level;
+    setAge();
+}
+
+// 随机年龄
+function setAge() {
+    let longevity = Character.race.longevity;
+    let max = ageMax;
+    if (longevity) max = longevityAgeMax;
+    Character.age = randomIntRound(ageMin, max);
+    console.log(Character)
+}
+
 
 // 身高
 function setBody() {
     Character.body.height = generateRandomHeight(Character.age);
-    if (Character.race.main !== '巨灵族')
+    if (Character.race.name !== '巨灵族')
         if (Character.race.mix_gant) {
             Character.body.height /= 50;
             Character.body.unit = "M";
@@ -281,7 +269,7 @@ function setSoul() {
     Character.soul.traits = traits_r === 0 ? BOXfilter1(localStorage.traitsP) : BOXfilter1(localStorage.traitsN);// 解释
     if (traits_r === 0 && RandomInt(100) <= 7) Character.soul.but = BOXfilter1(localStorage.traitsE);// 只不过
     let data = getDataFromFilter4(localStorage.skill);
-    Character.soul.skill.name = data.obj;
+    Character.soul.skill.name = data.name;
     Character.soul.skill.desc = data.desc;
     Character.soul.hobby = BOXfilter4(localStorage.hobby);
     Character.soul.hunting.target = BOXfilter4(localStorage.huntingTargets);
@@ -294,8 +282,8 @@ function setDress() {
     // 武器
     let weapon = getDataFromFilter4(localStorage.weapon);
     let weapon_effects = getDataFromFilter4(localStorage.weapon_effects);
-    Character.dress.weapon.name = weapon.obj;
-    Character.dress.weapon.desc = weapon_effects.obj;
+    Character.dress.weapon.name = weapon.name;
+    Character.dress.weapon.desc = weapon_effects.name;
 }
 
 function setPanel() {
@@ -307,12 +295,12 @@ function setPanel() {
     Character.panel.hidden_rate = 0;
     switch (Character.soul.hunting.target) {
         case "巨灵族":
-            Character.panel.capacity = RandomIntRound(4, 5);
-            Character.panel.hidden_rate = RandomIntRound(3, 5);
+            Character.panel.capacity = randomIntRound(4, 5);
+            Character.panel.hidden_rate = randomIntRound(3, 5);
             break;
         case "龙族":
-            Character.panel.capacity = RandomIntRound(3, 5);
-            Character.panel.hidden_rate = RandomIntRound(2, 5);
+            Character.panel.capacity = randomIntRound(3, 5);
+            Character.panel.hidden_rate = randomIntRound(2, 5);
             break;
     }
     switch (Character.soul.skill.name) {
@@ -516,6 +504,6 @@ function tagBackground() {
     return baseBackground + "," + regionBackground;
 }
 
-$(document).ready(function () {
-    $("#generate").click();
-})
+
+/** 调试模式，自动生成 */
+if (dev) $("#generate").click();

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <trees>
+     <tree path="/db/region.json" title="阵营，国家，信仰" extension="" presentableText="" tooltipTitle="" icon=""
+           textColor="" backgroundColor=""/>
+     <tree path="/db/race.json" title="种族"/>
+     <tree path="/db/camp.json" title="九宫格阵营"/>
+     <tree path="/db/outward.json" title="穿着，饰品"/>
+     <tree path="/db/disposition.json" title="性格，爱好，内驱"/>
+     <tree path="/db/sequence.json" title="天赋序列"/>
+     <tree path="/db/weapon.json" title="器魔"/>
+     <tree path="/db/power.json" title="力量，天赋序列"/>
+     <tree path="/db/background.json" title="场景，环境"/>
+     <tree path="/db/hair.json" title="头发"/>
+    <tree path="/db/face.json" title="脸"/>
+    <tree path="/db/eyes.json" title="眼睛"/>
+    <tree path="/db/body.json" title="身体"/>
+</trees>

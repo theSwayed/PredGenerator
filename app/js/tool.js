@@ -1,33 +1,81 @@
 //筛选器
+function getStorage(name) {
+    return JSON.parse(localStorage.getItem(name))
+}
+
+function getDataWithScope(data, key, value) {
+    return data.filter(item => item[key + "Max"] >= value && item[key + "Min"] <= value || item.required === 1)
+}
+
+function getDataUnderScope(data, key, value) {
+    return data.filter(item => item[key] <= value || item.required === 1);
+}
+
+
+function getDataUpperScope(data, key, value) {
+    return data.filter(item => item[key] >= value || item.required === 1)
+}
+
+function getDataRound(data) {
+    return data[[RandomInt(data.length)]];
+}
+
+function getDataFind(data, key, value) {
+    return data.filter(item => item[key] === value);
+}
+
+function getDataInArray(data, key, value) {
+    return data.filter(item => item[key].indexOf(value) !== -1 || item.required === 1)
+}
+
+function randomFromStrengthLevel(strength) {
+    // 确保param在1到6之间
+    param = Math.max(1, Math.min(6, (7 - strength)));
+
+    // 根据参数调整最小值和最大值
+    let minValue = 1;
+    let maxValue = 100 - (param - 1) * 15; // 参数越小，最大值越接近1
+
+    // 确保最大值不会小于最小值
+    if (maxValue < minValue) {
+        maxValue = minValue;
+    }
+
+    // 生成随机值
+    const randomValue = Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
+    return randomValue;
+}
+
+
 //类型1：基本随机筛选
 function BOXfilter1(DBbox) {
     var B_F1 = JSON.parse(DBbox);
-    return B_F1[RandomInt(B_F1.length)].obj;
+    return B_F1[RandomInt(B_F1.length)].name;
 }
 
 //类型2：LoLa坐标阈值范围，小于RF坐标
 function BOXfilter2(DBbox) {
     if (Character.camp.index > 100) Character.camp.index = parseInt(Character.camp.index / 10)
     var B_F2 = (JSON.parse(DBbox).filter(
-            item => item.Require == 1 || item.Power >= Character.power.index - ZBYZ && item.Power <= Character.power.index + ZBYZ && item.Region >= Character.region.index - ZBYZ && item.Region <= Character.region.index + ZBYZ)
+            item => item.require == 1 || item.power >= Character.power.index - ZBYZ && item.power <= Character.power.index + ZBYZ && item.region >= Character.region.index - ZBYZ && item.region <= Character.region.index + ZBYZ)
     ).filter(
-        item2 => item2.Require == 1 || item2.Camp <= Character.camp.index
+        item2 => item2.require == 1 || item2.camp <= Character.camp.index
     );
-    return B_F2[RandomInt(B_F2.length)].obj;
+    return B_F2[RandomInt(B_F2.length)].name;
 }
 
 
 //类型4：全系参照，LoLa坐标阈值范围，大于Age坐标，小于RF坐标
 function BOXfilter4(DBbox) {
     if (Character.camp.index > 100) Character.camp.index = parseInt(Character.camp.index / 10)
-    var B_F4 = ((JSON.parse(DBbox)).filter(item3 => item3.Require == 1 || item3.Power == null && item3.Region == null || item3.Power >= Character.power.index - ZBYZ && item3.Power <= Character.power.index + ZBYZ && item3.Region >= Character.region.index - ZBYZ && item3.Region <= Character.region.index + ZBYZ)).filter(item2 => item2.Require == 1 || item2.Age >= Character.age || item2.Camp <= Character.camp.index);
-    return B_F4[RandomInt(B_F4.length)].obj;
+    var B_F4 = ((JSON.parse(DBbox)).filter(item3 => item3.require == 1 || item3.power == null && item3.region == null || item3.power >= Character.power.index - ZBYZ && item3.power <= Character.power.index + ZBYZ && item3.region >= Character.region.index - ZBYZ && item3.region <= Character.region.index + ZBYZ)).filter(item2 => item2.require == 1 || item2.Age >= Character.age || item2.camp <= Character.camp.index);
+    return B_F4[RandomInt(B_F4.length)].name;
 }
 
 //类型4：全系参照，LoLa坐标阈值范围，大于Age坐标，小于RF坐标
 function getDataFromFilter4(DBbox) {
     if (Character.camp.index > 100) Character.camp.index = parseInt(Character.camp.index / 10)
-    var B_F4 = ((JSON.parse(DBbox)).filter(item3 => item3.Require == 1 || item3.Power == null && item3.Region == null || item3.Power >= Character.power.index - ZBYZ && item3.Power <= Character.power.index + ZBYZ && item3.Region >= Character.region.index - ZBYZ && item3.Region <= Character.region.index + ZBYZ)).filter(item2 => item2.Require == 1 || item2.Age >= Character.age || item2.Camp <= Character.camp.index);
+    var B_F4 = ((JSON.parse(DBbox)).filter(item3 => item3.require == 1 || item3.power == null && item3.region == null || item3.power >= Character.power.index - ZBYZ && item3.power <= Character.power.index + ZBYZ && item3.region >= Character.region.index - ZBYZ && item3.region <= Character.region.index + ZBYZ)).filter(item2 => item2.require == 1 || item2.Age >= Character.age || item2.camp <= Character.camp.index);
     return B_F4[RandomInt(B_F4.length)];
 }
 
@@ -35,7 +83,7 @@ function getDataFromFilter4(DBbox) {
 //类型5：根据年龄随机
 function filterFromAge(DBbox) {
     var data = (JSON.parse(DBbox).filter(
-            item => item.Require == 1 || item.Age >= Character.age)// 获取小于这个年龄的内容
+            item => item.require == 1 || item.Age >= Character.age)// 获取小于这个年龄的内容
     );
     return data[RandomInt(data.length)];
 }
@@ -44,16 +92,17 @@ function filterFromAge(DBbox) {
 function filterFromCamp(DBbox) {
     // 阵容决定？性格，态度，攻击目标
     var data = (JSON.parse(DBbox).filter(
-            item => item.Require == 1 || item.Camp <= Character.camp.index)// 获取小于这个年龄的内容
+            item => item.require == 1 || item.camp <= Character.camp.index)// 获取小于这个年龄的内容
     );
-    return data[RandomInt(data.length)].obj;
+    return data[RandomInt(data.length)].name;
 }
+
 //类型7：根据key value 随机
-function filterFroCondition(DBbox,key,value) {
+function filterFroCondition(DBbox, key, value) {
     var data = (JSON.parse(DBbox).filter(
-            item => item.Require === 1 ||  item[key] == value )// 获取小于这个年龄的内容
+            item => item.require === 1 || item[key] == value)// 获取小于这个年龄的内容
     );
-    return data[RandomInt(data.length)].obj;
+    return data[RandomInt(data.length)].name;
 }
 
 
@@ -63,7 +112,7 @@ function RandomInt(num) {
 }
 
 //随机计算，指定位数
-function RandomIntRound(min, max) {
+function randomIntRound(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 

@@ -1,0 +1,39 @@
+{
+    "faction": [
+        {"id":1,"name":"永恒王城","raceType":["base"],"race": ["人族"]},
+        {"id":14,"name":"浮空圣岛","raceType":["base"]},
+        {"id":11,"name":"天空城","raceType":["base"]},
+        {"id":3,"name":"魔法之森","raceType":["base","subspecies"]},
+        {"id":9,"name":"雾岛","raceType":["base","subspecies"]},
+        {"id":4,"name":"翡翠湖","raceType":["base","subspecies"]},
+        {"id":5,"name":"星云城","raceType":["base","subspecies"]},
+        {"id":6,"name":"乱星海","raceType":["subspecies"]},
+        {"id":7,"name":"奇迹岛","raceType":["subspecies"]},
+        {"id":8,"name":"落日冕","raceType":["subspecies"]},
+        {"id":2,"name":"雾霭谷","raceType":["subspecies"]},
+        {"id":13,"name":"十万大山","raceType":["subspecies"]},
+        {"id":12,"name":"混乱魔域","raceType":["monster"]},
+        {"id":10,"name":"幽冥谷","raceType":["monster"]}
+    ],
+    "country": [
+        {"id":1,"name":"A国","faction": "永恒王城"},
+        {"id":2,"name":"B国","faction": "浮空圣岛"},
+        {"id":3,"name":"C国","faction": "天空城"},
+        {"id":4,"name":"D国","faction": "魔法之森"},
+        {"id":5,"name":"E国","faction": "雾岛"},
+        {"id":6,"name":"F国","faction": "翡翠湖"},
+        {"id":7,"name":"G国","faction": "星云城"},
+        {"id":8,"name":"H国","faction": "乱星海"},
+        {"id":9,"name":"I国","faction": "奇迹岛"},
+        {"id":10,"name":"J国","faction": "落日冕"},
+        {"id":11,"name":"K国","faction": "雾霭谷"},
+        {"id":12,"name":"L国","faction": "十万大山"},
+        {"id":13,"name":"M国","faction": "混乱魔域"},
+        {"id":14,"name":"N国","faction": "幽冥谷"}
+    ],
+    "religion": [
+        {"id":1,"name":"A教","LL":20},
+        {"id":2,"name":"B教","LL":30},
+        {"id":3,"name":"C教","LL":40}
+    ]
+}

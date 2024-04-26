@@ -8,26 +8,28 @@
 //  站点：https://github.com/kumame/Tools
 //-----------------------------------------------------------------------------
 
+
 $("document").ready(function () {
     //判断DB数据是否存在或者需要更新
     if (dev || localStorage.DBversion < DBversion || !localStorage.DBversion) {
-        //json文件加载列表
-        var DBload = [
-            $.get('./db/body.json'),
-            $.get('./db/base.json'),
-            $.get('./db/soul.json'),
-            $.get('./db/inside.json'),
-            $.get('./db/dress.json'),
-            $.get('./db/pose.json'),
+        let dbList = [
+            'race', 'power', 'region', 'camp',
+            'eyes', 'hair', 'body',
+            'disposition',
+            'outward',
+            'background',
+            'weapon'
         ];
-        $.when(...DBload).then(function () {
-            // 使用 arguments 对象遍历传递给回调函数的参数
-            for (var i = 0; i < arguments.length; i++) {
-                makeLS(arguments[i]);
-            }
-            return loadAPP();
-        }, function () {
-            $("#warning").css("display", "block").text("数据库加载失败，请检查浏览器或网络环境")
+        // 创建一个空的数组用于存储每个JSON数据加载的Promise对象
+        var promises = [];
+        $.each(dbList, (key, name) => {
+            $.get('./db/' + name + '.json').then(function (data) {
+                setStorage(name, data)
+                dbList.shift()
+                if (dbList.length === 0) loadAPP()
+            }, function () {
+                $("#warning").css("display", "block").text("数据库加载失败，请检查浏览器或网络环境");
+            })
         });
         //更新版本号
         localStorage.DBversion = DBversion;
@@ -36,17 +38,15 @@ $("document").ready(function () {
     }
 });
 
-function makeLS(DB) {
-    let title;
-    for (let i = 0; i < Object.keys(DB[0]).length; i++) {
-        title = Object.keys(DB[0])[i];
-        localStorage.setItem(title, JSON.stringify(DB[0][title]));
+function setStorage(db, data) {
+    for (const key in data) {
+        localStorage.setItem(db + "." + key, JSON.stringify(data[key]));
     }
 }
 
 //载入程序
 function loadAPP() {
-    $.getScript('app/js/operation.js')
     $.getScript('app/js/tool.js')
+    $.getScript('app/js/operation.js')
     $.getScript('app/js/generate.js')
 }

@@ -1,0 +1,51 @@
+{
+    "environment": [
+        {"name": "夜晚，圆月"},
+        {"name": "夜晚，星空，圆月"},
+        {"name": "夜晚，星空，月牙"},
+        {"name": "室内"},
+        {"name": "阴天，乌云"}
+    ],
+    "scenes": [
+        {"name": "水魔法", "trans": "((water drops)),wet clothes,((beautiful detailed water)),((floating)),dynamic angle,"},
+        {"name": "迷雾，郊外"},
+        {"name": "森林"},
+        {"name": "湖畔"},
+        {"name": "中世纪，城镇"},
+        {"name": "海岛，海边"},
+        {"name": "海岛，海边"},
+        {"name": "悬崖，城镇"},
+        {"name": "雾气"},
+        {"name": "阴暗背景"},
+        {"name": "天空背景"},
+        {"name": "森林"},
+        {"name": "森林"},
+        {"name": "中世纪，城镇"}
+    ],
+    "lenses": [
+        {"name": "sitting"},
+        {"name": "坐在地上"},
+        {"name": "站着"},
+        {"name": "蹲着"},
+        {"name": "趴着"}
+    ],
+    "pose": [
+        {"name": "坐着", "trans": "sitting"},
+        {"name": "坐在地上"},
+        {"name": "站着"},
+        {"name": "蹲着"},
+        {"name": "趴着"}
+    ],
+    "state": [
+        {"name": "脱衣服中","trans": "undressing"},
+        {"name": "褪下衣物","trans": "clothes_down"},
+        {"name": "掀起衬衫","trans": "shirt_lift"},
+        {"name": "衬衫拉下来","trans": "shirt_pull"},
+        {"name": "拖拽衣服","trans": "clothes_tug"},
+        {"name": "衣服滑落","trans": "wardrobe_error"},
+        {"name": "脱下衬衫","trans": "shirt_removed"},
+        {"name": "湿衬衫","trans": "wet_shirt"},
+        {"name": "衣服出了意外","trans": "wardrobe_malfunction"},
+        {"name": "纽扣之间的缝隙","trans": "button_gap"}
+    ]
+}
