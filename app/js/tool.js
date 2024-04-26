@@ -16,8 +16,15 @@ function getDataUpperScope(data, key, value) {
     return data.filter(item => item[key] >= value || item.required === 1)
 }
 
-function getDataRound(data) {
-    return data[[RandomInt(data.length)]];
+
+function getDataExcept(data, key, value) {
+    return data.filter(item => item[key] !== value)
+}
+
+function getDataRound(data, value = false) {
+    let res = data[[RandomInt(data.length)]];
+    if (value) return res.name;
+    return res;
 }
 
 function getDataFind(data, key, value) {
@@ -57,7 +64,7 @@ function BOXfilter1(DBbox) {
 function BOXfilter2(DBbox) {
     if (Character.camp.index > 100) Character.camp.index = parseInt(Character.camp.index / 10)
     var B_F2 = (JSON.parse(DBbox).filter(
-            item => item.require == 1 || item.power >= Character.power.index - ZBYZ && item.power <= Character.power.index + ZBYZ && item.region >= Character.region.index - ZBYZ && item.region <= Character.region.index + ZBYZ)
+            item => item.require == 1 || item.power >= Character.power.strength.index - ZBYZ && item.power <= Character.power.strength.index + ZBYZ && item.region >= Character.region.index - ZBYZ && item.region <= Character.region.index + ZBYZ)
     ).filter(
         item2 => item2.require == 1 || item2.camp <= Character.camp.index
     );
@@ -68,14 +75,14 @@ function BOXfilter2(DBbox) {
 //类型4：全系参照，LoLa坐标阈值范围，大于Age坐标，小于RF坐标
 function BOXfilter4(DBbox) {
     if (Character.camp.index > 100) Character.camp.index = parseInt(Character.camp.index / 10)
-    var B_F4 = ((JSON.parse(DBbox)).filter(item3 => item3.require == 1 || item3.power == null && item3.region == null || item3.power >= Character.power.index - ZBYZ && item3.power <= Character.power.index + ZBYZ && item3.region >= Character.region.index - ZBYZ && item3.region <= Character.region.index + ZBYZ)).filter(item2 => item2.require == 1 || item2.Age >= Character.age || item2.camp <= Character.camp.index);
+    var B_F4 = ((JSON.parse(DBbox)).filter(item3 => item3.require == 1 || item3.power == null && item3.region == null || item3.power >= Character.power.strength.index - ZBYZ && item3.power <= Character.power.strength.index + ZBYZ && item3.region >= Character.region.index - ZBYZ && item3.region <= Character.region.index + ZBYZ)).filter(item2 => item2.require == 1 || item2.Age >= Character.age || item2.camp <= Character.camp.index);
     return B_F4[RandomInt(B_F4.length)].name;
 }
 
 //类型4：全系参照，LoLa坐标阈值范围，大于Age坐标，小于RF坐标
 function getDataFromFilter4(DBbox) {
     if (Character.camp.index > 100) Character.camp.index = parseInt(Character.camp.index / 10)
-    var B_F4 = ((JSON.parse(DBbox)).filter(item3 => item3.require == 1 || item3.power == null && item3.region == null || item3.power >= Character.power.index - ZBYZ && item3.power <= Character.power.index + ZBYZ && item3.region >= Character.region.index - ZBYZ && item3.region <= Character.region.index + ZBYZ)).filter(item2 => item2.require == 1 || item2.Age >= Character.age || item2.camp <= Character.camp.index);
+    var B_F4 = ((JSON.parse(DBbox)).filter(item3 => item3.require == 1 || item3.power == null && item3.region == null || item3.power >= Character.power.strength.index - ZBYZ && item3.power <= Character.power.strength.index + ZBYZ && item3.region >= Character.region.index - ZBYZ && item3.region <= Character.region.index + ZBYZ)).filter(item2 => item2.require == 1 || item2.Age >= Character.age || item2.camp <= Character.camp.index);
     return B_F4[RandomInt(B_F4.length)];
 }
 

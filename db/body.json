@@ -15,14 +15,14 @@
         {"name":"凹凸有致"}
     ],
     "color":[
-        {"name":"如玉","require":1},
-        {"name":"偏麦","require":1},
-        {"name":"白皙","require":1},
-        {"name":"红润","power":64,"region":32},
-        {"name":"乳白","require":1},
-        {"name":"雪白","power":23,"region":20},
-        {"name":"粉白","power":46,"region":11},
-        {"name":"苍白","power":53,"region":90}
+        {"name":"如玉"},
+        {"name":"偏麦"},
+        {"name":"白皙"},
+        {"name":"红润"},
+        {"name":"乳白"},
+        {"name":"雪白"},
+        {"name":"粉白"},
+        {"name":"苍白"}
     ],
     "position":[
         {"name":"额头"},

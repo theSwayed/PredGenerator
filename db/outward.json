@@ -1,4 +1,8 @@
 {
+
+  "crossRace": [
+    "拉米亚", "海妖"
+  ],
   "type": [
     {
       "id": 1,
@@ -7,10 +11,6 @@
     {
       "id": 2,
       "name": "连衣"
-    },
-    {
-      "id": 3,
-      "name": "异装"
     }
   ],
   "top": [
@@ -228,25 +228,25 @@
   "cross-dressing": [
   ],
   "jumpsuit": [
-    {"name": "连衫裤","trans": "jumpsuit"},
-    {"name": "连衣裙","trans": "dress"},
-    {"name": "微型连衣裙","trans": "microdress"},
-    {"name": "长连衣裙","trans": "long_dress"},
-    {"name": "露肩连衣裙","trans": "off-shoulder_dress"},
-    {"name": "无肩带连衣裙","trans": "strapless_dress"},
-    {"name": "露背连衣裙","trans": "backless_dress"},
-    {"name": "绕颈露背吊带裙","trans": "halter_dress"},
-    {"name": "吊帶連衣裙","trans": "sundress"},
-    {"name": "无袖连衣裙","trans": "sleeveless_dress"},
-    {"name": "夏日长裙","trans": "summer_dress"},
-    {"name": "西装","trans": "suit"},
-    {"name": "晚会礼服","trans": "canonicals"},
-    {"name": "女仆装","trans": "maid"},
-    {"name": "纳粹制服","trans": "ss_uniform"},
-    {"name": "白无垢","trans": "uchikake"},
-    {"name": "巫女服","trans": "miko"},
-    {"name": "和服","trans": "kimono"},
-    {"name": "旗袍","trans": "cheongsam"},
-    {"name": "后妈裙","trans": "Hip-wrapped jumpsuit"}
+    {"name": "连衫裤","trans": "jumpsuit","level": 2},
+    {"name": "连衣裙","trans": "dress","level": 1},
+    {"name": "微型连衣裙","trans": "microdress","level": 2},
+    {"name": "长连衣裙","trans": "long_dress","level": 1},
+    {"name": "露肩连衣裙","trans": "off-shoulder_dress","level": 1},
+    {"name": "无肩带连衣裙","trans": "strapless_dress","level": 1},
+    {"name": "露背连衣裙","trans": "backless_dress","level": 1},
+    {"name": "绕颈露背吊带裙","trans": "halter_dress","level": 1},
+    {"name": "吊帶連衣裙","trans": "sundress","level": 1},
+    {"name": "无袖连衣裙","trans": "sleeveless_dress","level": 1},
+    {"name": "夏日长裙","trans": "summer_dress","level": 1},
+    {"name": "西装","trans": "suit","level": 1},
+    {"name": "晚会礼服","trans": "canonicals","level": 1},
+    {"name": "女仆装","trans": "maid","level": 1},
+    {"name": "纳粹制服","trans": "ss_uniform","level": 1},
+    {"name": "白无垢","trans": "uchikake","level": 1},
+    {"name": "巫女服","trans": "miko","level": 1},
+    {"name": "和服","trans": "kimono","level": 1},
+    {"name": "旗袍","trans": "cheongsam","level": 1},
+    {"name": "后妈裙","trans": "Hip-wrapped jumpsuit","level": 1}
   ]
 }

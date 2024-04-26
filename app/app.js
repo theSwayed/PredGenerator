@@ -14,7 +14,7 @@ $("document").ready(function () {
     if (dev || localStorage.DBversion < DBversion || !localStorage.DBversion) {
         let dbList = [
             'race', 'power', 'region', 'camp',
-            'eyes', 'hair', 'body',
+            'eyes', 'face', 'hair', 'body',
             'disposition',
             'outward',
             'background',
@@ -47,6 +47,7 @@ function setStorage(db, data) {
 //载入程序
 function loadAPP() {
     $.getScript('app/js/tool.js')
-    $.getScript('app/js/operation.js')
+    $.getScript('app/js/character.js')
     $.getScript('app/js/generate.js')
+    $.getScript('app/js/operation.js')
 }
