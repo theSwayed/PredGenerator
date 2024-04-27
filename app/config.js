@@ -69,6 +69,7 @@ let Character = {
         faction: {
             id: 0,
             name: '',
+            race_type: "",
         },
         country: {
             id: 0,
@@ -80,12 +81,6 @@ let Character = {
         id: 0,
         size: 0,
         longevity: 0,
-    },
-    race_mix: {
-        main: '',// 混血
-        main_id: 0,
-        mix_gant: 0,// 混血种族为巨灵族
-        mix_point: 0// 混血率
     },
     face: {
         type: '',// 脸型
@@ -99,7 +94,6 @@ let Character = {
         look: '',// 眼神
         color: '',// 眼瞳
         diff: '',// 异瞳
-
     },
     hair: {
         type: '',// 发形
@@ -115,6 +109,7 @@ let Character = {
         unit: '',
         color: '',
         type: '',
+        cup: '',
     },
     outward: {
         wearing_type: 'jumpsuit',
@@ -155,8 +150,10 @@ let Character = {
             }
         },
         uniform: {
-            name: "",
-            trans: "",
+            suit: {
+                name: "",
+                trans: "",
+            }
         },
         cross: {
             body: {
@@ -171,8 +168,8 @@ let Character = {
         but: "",
         desc: "",
         however: "",
-		hobby:"",
-		hunting:"",
+        hobby: "",
+        hunting: "",
     },
     weapon: {
         demon: {

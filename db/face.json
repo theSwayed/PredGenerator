@@ -1,13 +1,15 @@
 {
     "type":[
-        {"name":"圆脸"},
-        {"name":"鹅蛋脸"},
-        {"name":"长脸"},
-        {"name":"心形脸"},
-        {"name":"椭圆脸"},
-        {"name":"方蛋脸"},
-        {"name":"钻石脸"},
-        {"name":"三角脸"}
+        {"name":"圆脸","trans": "round face"},
+        {"name":"瘦脸","trans": "slender face"},
+        {"name":"鹅蛋脸","trans": "oval face"},
+        {"name":"娃娃脸","trans": "baby face"},
+        {"name":"长脸","trans": "long face"},
+        {"name":"方脸","trans": "square face"},
+        {"name":"菱形脸","trans": "diamond face"},
+        {"name":"心形脸","trans": "heart shaped face"},
+        {"name":"钻石脸","trans": "inverted triangle face"},
+        {"name":"三角脸","trans": "triangular face"}
     ],
     "brow":[
         {"name":"细眉"},
@@ -36,7 +38,7 @@
         {"name":"弓唇"},
         {"name":"樱唇"}
     ],
-    "mouthStatus":[
+    "mouth_status":[
         {"name":"红润"},
         {"name":"淡雅"},
         {"name":"晶莹"},

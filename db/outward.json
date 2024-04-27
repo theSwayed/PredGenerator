@@ -1,5 +1,4 @@
 {
-
   "crossRace": [
     "拉米亚", "海妖"
   ],
@@ -21,7 +20,7 @@
     {"name": "长袖运动卫衣","trans": "sweatshirt"},
     {"name": "夏威夷衫","trans": "hawaiian_shirt"},
     {"name": "连帽衫","trans": "hoodie"},
-    {"name": "(烹饪时穿的)罩衫","trans": "kappougi"},
+    {"name": "罩衫","trans": "kappougi"},
     {"name": "格子衬衫","trans": "plaid_shirt"},
     {"name": "无袖衬衫","trans": "sleeveless_shirt"},
     {"name": "条纹衬衫","trans": "striped_shirt"},

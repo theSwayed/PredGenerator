@@ -1,28 +1,33 @@
 {
     "type":[
-        {"name":"曲线匀称"},
-        {"name":"匀称矫健"},
-        {"name":"匀称丰满"},
-        {"name":"匀称纤细"},
-        {"name":"纤细柔润"},
-        {"name":"纤瘦"},
-        {"name":"清瘦"},
-        {"name":"削瘦"},
-        {"name":"瘦骨如柴"},
-        {"name":"体型圆润"},
-        {"name":"婴儿肥"},
-        {"name":"曲线丰满"},
-        {"name":"凹凸有致"}
+        {"name":"曲线匀称","trans": "glamor"},
+        {"name":"匀称矫健","trans": "glamor"},
+        {"name":"匀称丰满","trans": "curvy"},
+        {"name":"匀称纤细","trans": "slender"},
+        {"name":"纤细柔润","trans": "chest"},
+        {"name":"纤瘦","trans": "thin"},
+        {"name":"瘦骨如柴","trans": "skinny"},
+        {"name":"婴儿肥","trans": "baby fat"},
+        {"name":"曲线丰满","trans": "plump"},
+        {"name":"凹凸有致","trans": "plump"}
     ],
     "color":[
-        {"name":"如玉"},
-        {"name":"偏麦"},
-        {"name":"白皙"},
-        {"name":"红润"},
-        {"name":"乳白"},
-        {"name":"雪白"},
-        {"name":"粉白"},
-        {"name":"苍白"}
+        {"name":"如玉","trans": "fair_skin"},
+        {"name":"偏麦","trans": "deep_skin"},
+        {"name":"白皙","trans": "white_skin"},
+        {"name":"红润","trans": "pink_fair_skin"},
+        {"name":"乳白","trans": "fair_skin"},
+        {"name":"雪白","trans": "fair_skin"},
+        {"name":"粉白","trans": "pink_fair_skin"},
+        {"name":"苍白","trans": "pale_skin"}
+    ],
+    "cup": [
+        {"name": "A cup","trans": "flat chest"},
+        {"name": "B cup","trans": "small_breasts"},
+        {"name": "C cup","trans": "medium breasts"},
+        {"name": "D cup","trans": "big breasts"},
+        {"name": "E cup","trans": "huge breasts"},
+        {"name": "F cup","trans": "gigantic breasts"}
     ],
     "position":[
         {"name":"额头"},

@@ -1,34 +1,36 @@
 {
     "base": [
-        {"id": 1,"name":"人类","level":1, "size": "normal", "longevity": 0},
-        {"id": 2,"name":"巨灵族","level":3, "size": "huge", "longevity": 0,
+        {"id": 1,"name":"人族","level":1, "size": "normal", "longevity": 0},
+        {"id": 2,"name":"巨灵族","trans": "giantess","level":3, "size": "huge", "longevity": 0,
 		"capacity":[4, 5],
 		"hidden_rate":[3, 5]
 		},
-        {"id": 14,"name":"妖精","level":4, "size": "mini", "longevity": 1},
-        {"id": 16,"name":"精灵","level":5, "size": "normal", "longevity": 1},
-        {"id": 17,"name":"仙灵","level":6, "size": "normal", "longevity": 1}
+        {"id": 14,"name":"妖精","trans": "fairy_wings","level":4, "size": "mini", "longevity": 1},
+        {"id": 16,"name":"精灵","trans": "elf ears","level":5, "size": "normal", "longevity": 1},
+        {"id": 17,"name":"仙灵","trans": "fairy_wings","level":6, "size": "normal", "longevity": 1}
     ],
     "subspecies": [
-        {"id": 4,"name":"狐族","level":2, "size": "normal", "longevity": 0},
-        {"id": 5,"name":"猫族","level":2, "size": "normal", "longevity": 0},
-        {"id": 13,"name":"龙族","level":4, "size": "normal", "longevity": 1,
+        {"id": 4,"name":"狐族","trans": "fox girl,fox_ears","level":2, "size": "normal", "longevity": 0},
+        {"id": 4,"name":"兔族","trans": "bunny girl,bunny_ears","level":2, "size": "normal", "longevity": 0},
+        {"id": 5,"name":"猫族","trans": "cat girl,cat_ears,cat_tail","level":2, "size": "normal", "longevity": 0},
+        {"id": 13,"name":"龙族","trans": "dragon_horns","level":4, "size": "normal", "longevity": 1,
 		"capacity":[3, 5],
 		"hidden_rate":[3, 5]
 		},
-        {"id": 8,"name":"鹿族","level":1, "size": "normal", "longevity": 0},
-        {"id": 9,"name":"虎族","level":2, "size": "normal", "longevity": 0},
-        {"id": 9,"name":"狼族","level":2, "size": "normal", "longevity": 0}
+        {"id": 8,"name":"鹿族","trans": "antlers,deer ears","level":1, "size": "normal", "longevity": 0},
+        {"id": 9,"name":"虎族","trans": "tiger_ears,tiger_tail","level":2, "size": "normal", "longevity": 0},
+        {"id": 9,"name":"狼族","trans": "wolf ears","level":2, "size": "normal", "longevity": 0}
     ],
     "monster": [
-        {"id": 12,"name":"树妖","level":2, "size": "normal", "longevity": 1},
-        {"id": 7,"name":"海妖","level":3, "size": "normal", "longevity": 0},
-        {"id": 3,"name":"魅魔","level":1, "size": "normal", "longevity": 0},
-        {"id": 6,"name":"拉米亚","level":2, "size": "normal", "longevity": 0,
+        {"id": 12,"name":"树妖","trans": "fairy_wings","level":2, "size": "normal", "longevity": 1},
+        {"id": 7,"name":"海妖","trans": "fish tail","level":3, "size": "normal", "longevity": 0},
+        {"id": 3,"name":"魅魔","trans": "demon girl,demon tail,","level":1, "size": "normal", "longevity": 0},
+        {"id": 6,"name":"拉米亚","trans": "lamia,snake tail","level":2, "size": "normal", "longevity": 0,
 		"capacity":[3, 5]
 		},
-        {"id": 11,"name":"夜魔","level":3, "size": "normal", "longevity": 0},
-        {"id": 10,"name":"幽魂","level":3, "size": "normal", "longevity": 1},
-        {"id": 15,"name":"血族","level":4, "size": "normal", "longevity": 1}
+        {"id": 11,"name":"夜魔","trans": "night demon","level":3, "size": "normal", "longevity": 0},
+        {"id": 10,"name":"幽魂","trans": "ghost girl","level":3, "size": "normal", "longevity": 1},
+        {"id": 10,"name":"鬼族","trans": "oni_horns","level":3, "size": "normal", "longevity": 1},
+        {"id": 15,"name":"血族","trans": "fairy_wings","level":4, "size": "normal", "longevity": 1}
     ]
 }

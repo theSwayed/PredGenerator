@@ -4,7 +4,7 @@ function initPred() {
     // 设置种族，兼容上级数据，链式操作
     setRegion();
 
-     setBackground();
+    setBackground();
     //
     setPanel();
 
@@ -13,7 +13,7 @@ function initPred() {
 function generate() {
     simpleGenerate();
     panelGenerate();
-    // tagGenerate();
+    tagGenerate();
 }
 
 function simpleGenerate() {
@@ -25,7 +25,7 @@ function simpleGenerate() {
         <p>${getEyesStr()}<u>${Character.eyes.shape}</u>，<u>${Character.face.brow}</u>，目光<u>${Character.eyes.look}</u>。</p>
         <p><u>${Character.face.mouth}${Character.face.mouth_status}</u>，妆容<u>${Character.face.makeup}</u>。</p>
         <p>一头${getHairStr()}的<u>${Character.hair.length}${Character.hair.type}</u>梳成<u>${Character.hair.bangs}</u>的<u>${Character.hair.style}</u>。</p>
-        <p>喜欢的穿搭是</p>
+        <p>日常的打扮是${getOutwardStr()}</p>
         `
     let DNA2html = ` 
 		<p>性格${getDispositionStr()}</p>
@@ -42,33 +42,47 @@ function simpleGenerate() {
 }
 
 function panelGenerate() {
-	let connect = Character.disposition.but ? "但" : "又";
-	let however = Character.disposition.however ? `，只不过${Character.disposition.however}`:"";
-	let disposition = Character.disposition.name+connect+Character.disposition.desc+however;
-	
-	let eyes = "";
-	if (Character.eyes.diff) {
-	    eyes= `${Character.eyes.color}、${Character.eyes.diff}异色`
-	} else {
-	    eyes=  Character.eyes.color
-	}
-	
-	let hair = Character.hair.color;
-	if (Character.hair.gradient) {// 渐变
-	    hair += " 渐变 " + Character.hair.gradient
-	}
-	if (Character.hair.highlight) {// 渐变
-	    hair += " 挑染 " + Character.hair.highlight
-	}
-	
-	let wearing = [];
-	for(let i in Character.outward[Character.outward.wearing_type]){
-		wearing.push(Character.outward[Character.outward.wearing_type][i].name)
-	}
-	wearingStr = wearing.join('，')
+    let connect = Character.disposition.but ? "但" : "又";
+    let however = Character.disposition.however ? `，只不过${Character.disposition.however}` : "";
+    let disposition = Character.disposition.name + connect + Character.disposition.desc + however;
+
+    let eyes = "";
+    if (Character.eyes.diff) {
+        eyes = `${Character.eyes.color}、${Character.eyes.diff}异色`
+    } else {
+        eyes = Character.eyes.color
+    }
+
+    let hair = Character.hair.color;
+    if (Character.hair.gradient) {// 渐变
+        hair += " 渐变 " + Character.hair.gradient
+    }
+    if (Character.hair.highlight) {// 渐变
+        hair += " 挑染 " + Character.hair.highlight
+    }
+
+    let wearing = [];
+    for (let i in Character.outward[Character.outward.wearing_type]) {
+        wearing.push(Character.outward[Character.outward.wearing_type][i].name)
+    }
+    let wearingStr = wearing.join('，')
+
+    let accessories = Character.outward.accessories;
+    let accessStr = [];
+    if (accessories.length) {
+        for (let i in accessories) {
+            if (accessories[i].state.length)
+                accessStr.push(accessories[i].state.name + accessories[i].name)
+            else accessStr.push(accessories[i].name);
+        }
+        accessStr = accessStr.join("、")
+    } else {
+        accessStr = "无";
+    }
+
     let DNA1html = `
         <div style="width: 26em;">
-            <div style="display: inline-flex;">
+            <div style="display: inline-flex;width: 100%">
                 <div>
                     <p>种族：${Character.race.name}</p>
                     <p>年龄：${Character.age}</p>
@@ -90,6 +104,7 @@ function panelGenerate() {
         <p>发型：${hair}${Character.hair.length}${Character.hair.type} ${Character.hair.style}，${Character.hair.bangs}</p>
         <p>身材：肤色${Character.body.color}，${Character.body.type}</p>
         <p>日常穿搭：${wearingStr}</p>
+        <p>喜欢的饰品：${accessStr}</p>
         <br>
         <p>体质：${Character.power.constitution.name}</p>
         <p>作为捕食者：${Character.power.constitution.pred}</p>
@@ -104,16 +119,45 @@ function panelGenerate() {
 
 function tagGenerate() {
     let DNA1html = `
-        <p>[主体:0],1girl,solo,full body,${Character.race.name},${tagBody()},</p>
-        <p>[面部:0],${Character.face.type},${Character.face.brow},${Character.face.mouth},妆容${Character.face.makeup},</p>
-        <p>[眼睛:0],${getEyesStr()}眼睛,${Character.eyes.shape},${Character.face.brow},${Character.eyes.look},</p>
-        <p>[身材:0],皮肤${Character.body.color},体型${Character.body.type},中等胸部,</p>
-        <p>[穿着:0],${Character.dress.clothing},</p>
-        <p>[背景:0],${tagBackground()},</p>
-        <p>[动作:0],${tagPose()},</p>
+        <p>[主体:0],${getBodyTags()},</p>
+        <p>[面部:0],${getFaceTags()},</p>
+        <p>[眼睛:0],${getEyesTags()},</p>
+        <p>[穿着:0],,</p>
+        <p>[背景:0],,</p>
+        <p>[动作:0],,</p>
         <p>[角度:0],look at viewer,</p>
         `
     $("#info-tag").html(DNA1html);
+}
+
+function getBodyTags() {
+    let tags = [
+        "1girl",
+        "solo",
+        "full body",
+        getTrans(db.race[Character.region.faction.race_type], Character.race.name)// 种族形象
+    ];
+    let tagKeys = ["type", "color", "cup"];
+    let bodyTags = makeTags('body', tagKeys)
+    return tags.concat(bodyTags).join(",")
+}
+
+function getFaceTags() {
+    let tags = makeTags('face', Object.keys(Character.face))
+    return tags.join(",")
+}
+
+function getEyesTags() {
+    let tags = [];
+    let tagKeys = ["shape", "look"]
+    tags = tags.concat(makeTags('eyes', tagKeys));
+    if (Character.eyes.diff)
+        tags.push("heterochromia");
+    tags = tags.concat(makeTags('eyes', ["color"]));
+    if (Character.eyes.diff){
+        tags.push(getTrans(db.eyes.color, Character.eyes.diff))
+    }
+    return tags.join(",")
 }
 
 function getCall() {
@@ -142,10 +186,10 @@ function getEyesStr() {
     }
 }
 
-function getDispositionStr(){
-	let connect = Character.disposition.but ? " 但 " : " 又 "
-	let however = Character.disposition.however ? `，只不过<u>${Character.disposition.however}</u>`:"";
-	return `<u>${Character.disposition.name}</u>${connect}<u>${Character.disposition.desc}</u>${however}。`
+function getDispositionStr() {
+    let connect = Character.disposition.but ? " 但 " : " 又 "
+    let however = Character.disposition.however ? `，只不过<u>${Character.disposition.however}</u>` : "";
+    return `<u>${Character.disposition.name}</u>${connect}<u>${Character.disposition.desc}</u>${however}。`
 }
 
 // 渐变，应随Age增高而减少
@@ -168,6 +212,44 @@ function highlight() {
         return "";
 }
 
+function getOutwardStr() {
+    let wearing = [];
+    for (let i in Character.outward[Character.outward.wearing_type]) {
+        wearing.push(`<u>${Character.outward[Character.outward.wearing_type][i].name}</u>`)
+    }
+    wearing = wearing.join("、")
+
+    let accessories = Character.outward.accessories;
+    let accessStr = [];
+    if (accessories.length) {
+        wearing += "，喜欢";
+        for (let i in accessories) {
+            if (accessories[i].state.length)
+                accessStr.push("<u>" + accessories[i].state.name + accessories[i].name + "</u>")
+            else accessStr.push("<u>" + accessories[i].name + "</u>");
+        }
+        wearing += accessStr.join("、")
+        wearing += "之类的饰品"
+    }
+    return wearing;
+}
+
+function getTallTag() {
+    let height = Character.body.height;
+    if (Character.body.unit === "M") height *= 100;
+    if (height > 200) {
+        type = "giantess";
+    } else if (height > 175) {
+        type = "tall";
+    } else if (height > 160) {
+        type = "normal height";
+    } else if (height > 150) {
+        type = "short height";
+    } else {
+        type = "loli, petite"
+    }
+    return type;
+}
 
 /** 调试模式，自动生成 */
 if (dev) $(document).ready(() => {

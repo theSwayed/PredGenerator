@@ -21,6 +21,7 @@ function setRegion() {
 
     Character.region.faction.id = faction.id;
     Character.region.faction.name = faction.name;
+    Character.region.faction.race_type = getDataRound(faction.raceType);
 
     let country = db.region.country;
     country = getDataFind(country, "faction", faction.name);
@@ -28,15 +29,16 @@ function setRegion() {
     Character.region.country.id = country.id;
     Character.region.country.name = country.name;
     // 设置种族，兼容上级数据，链式操作
-    setRace(getDataRound(faction.raceType));
+    setRace();
 }
 
 
 /** 根据地区设置种族 **/
-function setRace(race_tag) {
-    let race = db.race[race_tag];
+function setRace() {
+    let race_type = Character.region.faction.race_type
+    let race = db.race[race_type];
     race = getDataRound(race);
-	initPanel(race);
+    initPanel(race);
     Character.race.id = race.id;
     Character.race.name = race.name;
     Character.race.longevity = race.longevity;
@@ -52,7 +54,6 @@ function setRace(race_tag) {
     setDisposition()// 设置性格
     setPower()// 设置体质序列
     setWeapon()// 设置器魔
-
 }
 
 /** 能量等级 */
@@ -79,7 +80,7 @@ function setFace() {
     Character.face.brow = getDataRound(db.face.brow, true);// 眉
     Character.face.makeup = getDataRound(db.face.makeup, true); // 妆容
     Character.face.mouth = getDataRound(db.face.mouth, true);// 嘴
-    Character.face.mouth_status = getDataRound(db.face.mouthStatus, true);// 嘴状态
+    Character.face.mouth_status = getDataRound(db.face.mouth_status, true);// 嘴状态
 }
 
 /** 眼睛 */
@@ -112,8 +113,9 @@ function setBody() {
         Character.body.unit = "M";
         Character.body.height /= 10;
     } else if (Character.race.size === 'mini') Character.body.height /= 10;
-    Character.body.color = getDataRound(db.body.color,true);// 肤色
-    Character.body.type = getDataRound(db.body.type,true);// 体型
+    Character.body.color = getDataRound(db.body.color, true);// 肤色
+    Character.body.type = getDataRound(db.body.type, true);// 体型
+    Character.body.cup = getDataRound(db.body.cup, true);// 柰子
 }
 
 /** 设置服装 */
@@ -141,8 +143,8 @@ function setOutward() {
             let key = tag - outward.jumpsuit.length - outward.top.length;
             let uniform = outward.uniform[key - 1];
 
-            Character.outward.uniform.name = uniform.name;
-            Character.outward.uniform.trans = uniform.trans;
+            Character.outward.uniform.suit.name = uniform.name;
+            Character.outward.uniform.suit.trans = uniform.trans;
         } else if (tag > outward.jumpsuit.length) {
             // diy
             let key = tag - outward.jumpsuit.length;
@@ -210,12 +212,12 @@ function setDisposition() {
     Character.disposition.name = dis_flag === 0 ? getDataRound(disposition.good, true) : getDataRound(disposition.bad, true);// 性格
     Character.disposition.but = dis_flag !== desc_flag;// 又但
     Character.disposition.desc = desc_flag === 0 ? getDataRound(disposition.goodDesc, true) : getDataRound(disposition.badDesc, true);// 解释
-    if (randomInt(100) <= 7) 
-		Character.disposition.however = desc_flag === 0 ? getDataRound(disposition.goodHowever, true) : getDataRound(disposition.badHowever, true);// 只不过
-	
-	// 爱好目标
-	Character.disposition.hobby = getDataRound(disposition.hobby, true);
-	Character.disposition.hunting = getDataRound(disposition.huntingTargets, true);
+    if (randomInt(100) <= 7)
+        Character.disposition.however = desc_flag === 0 ? getDataRound(disposition.goodHowever, true) : getDataRound(disposition.badHowever, true);// 只不过
+
+    // 爱好目标
+    Character.disposition.hobby = getDataRound(disposition.hobby, true);
+    Character.disposition.hunting = getDataRound(disposition.huntingTargets, true);
 }
 
 function setPower() {
@@ -225,7 +227,7 @@ function setPower() {
 
     // 设置体质
     constitution = getDataRound(constitution)
-	initPanel(constitution)
+    initPanel(constitution)
 
     Character.power.constitution.name = constitution.name;
     Character.power.constitution.pred = constitution.pred;
@@ -236,42 +238,42 @@ function setPower() {
     if (!flag) talent = getDataUnderScope(talent, 'level', strength);
     else talent = getDataUpperScope(talent, 'level', strength)
     talent = getDataRound(talent);
-	initPanel(talent)
+    initPanel(talent)
     Character.power.talent.name = talent.name;
     Character.power.talent.desc = talent.desc;
 }
 
 /** 器魔 **/
-function setWeapon(){
+function setWeapon() {
     let demon = db.weapon.demon;
     let effects = db.weapon.effects;
     let strength = Character.power.strength.level;
     demon = getDataRound(getDataUnderScope(demon, 'level', strength));
     effects = getDataRound(getDataUnderScope(effects, 'level', strength));
-	Character.weapon.demon.name = demon.name;
-	Character.weapon.demon.effects = effects.name;
+    Character.weapon.demon.name = demon.name;
+    Character.weapon.demon.effects = effects.name;
 }
 
 /** 根据数据库初始化面板 */
-function initPanel(data){
-	let list = [ "appetite",
-	    "capacity",
-	    "hidden_rate",
-	    "toughness",
-	    "digest_speed",
-	    "absorb_rate"]
-	for(let key in data){
-		if(list.indexOf(key) !== -1){
-			// 这个数据里面有影响面板的因素，取最大值
-			let value = 0;
-			if(typeof data[key] == 'object'){
-				value = randomIntRound(data[key][0],data[key][1]);
-			}else{
-				value = data[key];
-			}
-			Character.panel[key] = Math.max(value,Character.panel[key]);
-		}
-	}
+function initPanel(data) {
+    let list = ["appetite",
+        "capacity",
+        "hidden_rate",
+        "toughness",
+        "digest_speed",
+        "absorb_rate"]
+    for (let key in data) {
+        if (list.indexOf(key) !== -1) {
+            // 这个数据里面有影响面板的因素，取最大值
+            let value = 0;
+            if (typeof data[key] == 'object') {
+                value = randomIntRound(data[key][0], data[key][1]);
+            } else {
+                value = data[key];
+            }
+            Character.panel[key] = Math.max(value, Character.panel[key]);
+        }
+    }
 }
 
 function setPanel() {
@@ -313,10 +315,10 @@ function setPanel() {
 
 //修改生成颜色
 function setBackground() {
-	let X = Character.age;
-	if (Character.age > 100) X = parseInt(Character.age / 10)
-	else if (Character.age > 1000) X = parseInt(Character.age / 100)
-	let Y = Character.region.index;
+    let X = Character.age;
+    if (Character.age > 100) X = parseInt(Character.age / 10)
+    else if (Character.age > 1000) X = parseInt(Character.age / 100)
+    let Y = Character.region.index;
     let background_color = hslToRgb((X + Y) * 1.8 / 360, +((Y - 50) * 0.1 + 30) / 100, ((X - 50) * 0.1 + 50) / 100);
     Character.panel_settings.color = background_color;
     $('.bg_card').css("background-color", background_color);
@@ -391,23 +393,6 @@ function setOptions(data, indicator) {
             },
         ]
     };
-}
-
-function tagBody() {
-    let height = Character.body.height;
-    if (Character.body.unit === "M") height *= 100;
-    if (height > 200) {
-        type = "giantess";
-    } else if (height > 175) {
-        type = "tall";
-    } else if (height > 160) {
-        type = "normal height";
-    } else if (height > 150) {
-        type = "short height";
-    } else {
-        type = "loli, petite"
-    }
-    return type;
 }
 
 /** 设置阵营 */

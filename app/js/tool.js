@@ -1,4 +1,3 @@
-
 function getDataWithScope(data, key, value) {
     return data.filter(item => item[key + "Max"] >= value && item[key + "Min"] <= value || item.required === 1)
 }
@@ -15,6 +14,22 @@ function getDataUpperScope(data, key, value) {
 
 function getDataExcept(data, key, value) {
     return data.filter(item => item[key] !== value)
+}
+
+function getTrans(data, name) {
+    data = getDataFind(data, 'name', name);
+    // console.log(data,name)
+    if (typeof data[0].trans === 'string') return data[0].trans;
+    else return name;
+}
+
+function makeTags(type, tags) {
+    let data = [];
+    for (let i in tags) {
+        let tag = getTrans(db[type][tags[i]], Character[type][tags[i]]);
+        data.push(tag)
+    }
+    return data;
 }
 
 function getDataRound(data, value = false) {
