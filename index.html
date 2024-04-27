@@ -1,81 +1,81 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-    <title>食者生成器</title>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta property="og:image" content="app/img/logo.png"/>
-    <meta name="keywords" content="pred generator"/>
-    <meta name="description" content="pred generator"/>
-    <meta name="viewport" content="width=device-width, initial-scale=0.5"/>
-    <link rel="icon" type="image/png" href="app/img/logo.png">
-    <link href="app/style.css" rel="stylesheet" type="text/css"/>
-    <script src="app/js/jquery.min.js"></script>
-    <script src="app/js/echarts.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-</head>
-<body>
-<div class="container">
-    <h1>食者生成器</h1>
-    <h4>Pred Generator</h4>
-</div>
-<div class="container" id="warning"></div>
-<div class="container">
-    <div class="title">>_</div>
-    <ul class="block__list block__list_words">
-        <li>
-            <label for="CharacterName">姓名</label>
-            <input type="text" id="CharacterName" style="width: 10rem;">
-        </li>
-    </ul>
-    <div class="MaT2">
-        <a id="generate" href="javascript:;" class="block__list_words Bnt MaT1">随机生成</a>
-    </div>
-</div>
-<div class="container" id="content">
-    <div class="switch_tab">
-        <div class="on" data-target="simple">基础</div>
-        <div data-target="panel">面板</div>
-        <div data-target="tag">词条</div>
-    </div>
-    <div class="cardbox" id="download_content">
-        <div class="Cname">
-            <div class="first"></div>
-            <div class="last"></div>
-        </div>
-        <div id="screen-simple" class="screen screen-simple active">
-            <div class="card bg_card P-T4 desc1"></div>
-            <div class="card bg_card MaT1 desc2"></div>
-        </div>
-        <div id="screen-panel" class="screen screen-panel bg_card">
-            <div id="info-panel" class="card P-T4 desc1">
-            </div>
-            <div id="stand-panel">
-                <div id="panel" style="width: 250px;height: 250px;"></div>
-            </div>
-        </div>
-        <div id="screen-tag" class="screen screen-tag bg_card">
-            <div id="info-tag" class="card P-T4 desc1">
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container" id="download">
-    <div class="MaT2">
-        <a id="downloadBtn" href="javascript:;" class="block__list_words Bnt MaT1">导出为图片</a>
-        <a id="copyContent" href="javascript:;" class="block__list_words Bnt MaT1">复制提示词</a>
-    </div>
-</div>
-<div>
-    <h3>
-        <a href='https://kumame.github.io/Tools/'>ToolBox</a>
-        Website create in 2020 , Maintainer
-        <a href='https://kumame.pw'>熊豆(kumame)</a>
-    </h3>
-</div>
-</body>
-<script src="app/config.js"></script>
-<script>
-    $.getScript('app/app.js')
-</script>
+	<head>
+		<title>食者生成器</title>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta property="og:image" content="app/img/logo.png" />
+		<meta name="keywords" content="pred generator" />
+		<meta name="description" content="pred generator" />
+		<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+		<link rel="icon" type="image/png" href="app/img/logo.png">
+		<link href="app/style.css" rel="stylesheet" type="text/css" />
+		<script src="app/js/jquery.min.js"></script>
+		<script src="app/js/echarts.min.js"></script>
+		<script src="app/js/html2canvas.min.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<h1>食者生成器</h1>
+			<h4>Pred Generator</h4>
+		</div>
+		<div class="container" id="warning"></div>
+		<div class="container">
+			<div class="title">>_</div>
+			<ul class="block__list block__list_words">
+				<li>
+					<label for="CharacterName">姓名</label>
+					<input type="text" id="CharacterName" style="width: 10rem;">
+				</li>
+			</ul>
+			<div class="MaT2">
+				<a id="generate" href="javascript:;" class="block__list_words Bnt MaT1">随机生成</a>
+			</div>
+		</div>
+		<div class="container" id="content">
+			<div class="switch_tab">
+				<div class="on" data-target="simple">基础</div>
+				<div data-target="panel">面板</div>
+				<div data-target="tag">词条</div>
+			</div>
+			<div class="cardbox" id="download_content">
+				<div class="Cname">
+					<div class="first"></div>
+					<div class="last"></div>
+				</div>
+				<div id="screen-simple" class="screen screen-simple active">
+					<div class="card bg_card P-T4 desc1"></div>
+					<div class="card bg_card MaT1 desc2"></div>
+				</div>
+				<div id="screen-panel" class="screen screen-panel bg_card">
+					<div id="info-panel" class="card P-T4 desc1">
+					</div>
+					<div id="stand-panel">
+						<div id="panel" style="width: 250px;height: 250px;"></div>
+					</div>
+				</div>
+				<div id="screen-tag" class="screen screen-tag bg_card">
+					<div id="info-tag" class="card P-T4 desc1">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container" id="download">
+			<div class="MaT2">
+				<a id="downloadBtn" href="javascript:;" class="block__list_words Bnt MaT1">导出为图片</a>
+				<a id="copyContent" href="javascript:;" class="block__list_words Bnt MaT1">复制提示词</a>
+			</div>
+		</div>
+		<div>
+			<h3>
+				<a href='https://kumame.github.io/Tools/'>ToolBox</a>
+				Website create in 2020 , Maintainer
+				<a href='https://kumame.pw'>熊豆(kumame)</a>
+			</h3>
+		</div>
+	</body>
+	<script src="app/config.js"></script>
+	<script>
+		$.getScript('app/app.js')
+	</script>
 </html>

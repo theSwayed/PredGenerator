@@ -3,16 +3,6 @@
   "crossRace": [
     "拉米亚", "海妖"
   ],
-  "type": [
-    {
-      "id": 1,
-      "name": "分衣"
-    },
-    {
-      "id": 2,
-      "name": "连衣"
-    }
-  ],
   "top": [
     {"name": "女式衬衫","trans": "blouse"},
     {"name": "白衬衫","trans": "white_shirt"},
@@ -101,7 +91,7 @@
     {"name": "牛仔短裤","trans": "denim_shorts", "socks": 3},
     {"name": "真理裤","trans": "dolphin_shorts", "socks": 3},
     {"name": "运动裤","trans": "tight_pants", "socks": 3},
-    {"name": "瑜伽裤","trans": "yoga_pants", "socks": 3},
+    {"name": "瑜伽裤","trans": "yoga_pants", "socks": 1},
     {"name": "骑行裤","trans": "bike_shorts", "socks": 3},
     {"name": "体操短裤","trans": "gym_shorts", "socks": 3},
     {"name": "长裤","trans": "pants", "socks": 1},
@@ -123,7 +113,7 @@
     {"name": "花边裙","trans": "frilled_skirt", "socks": 2},
     {"name": "长裙","trans": "long_skirt", "socks": 1}
   ],
-  "sock": [
+  "socks": [
     {"name": "连裤袜","trans": "pantyhose", "level": 3},
     {"name": "裤袜","trans": "leggings", "level": 3},
     {"name": "长筒袜","trans": "legwear", "level": 2},
@@ -134,13 +124,13 @@
     {"name": "渔网袜","trans": "stirrup_legwear", "level": 3},
     {"name": "长短袜","trans": "suspenders", "level": 3},
     {"name": "吊带袜","trans": "uneven_legwear", "level": 2},
-    {"name": "泡泡袜","trans": "loose_socks", "level": 1}
+    {"name": "泡泡袜","trans": "loose_socks", "level": 2}
   ],
-  "shoe": [
+  "shoes": [
     {"name": "赤脚","trans": "no_shoes", "level": 0},
     {"name": "小皮鞋","trans": "loafers", "level": 1},
     {"name": "运动鞋","trans": "sneakers", "level": 1},
-    {"name": "居家鞋","trans": "uwabaki", "level": 1},
+    {"name": "居家鞋","trans": "uwabaki", "level": 0},
     {"name": "厚底鞋","trans": "platform_footwear", "level": 1},
     {"name": "高跟鞋","trans": "high_heels", "level": 1},
     {"name": "细跟高跟鞋","trans": "stiletto_heels", "level": 1},
@@ -159,6 +149,14 @@
     {"name": "露趾靴","trans": "toeless_boots", "level": 2},
     {"name": "雪地靴","trans": "snow_boots", "level": 2},
     {"name": "马丁靴","trans": "doc_martens", "level": 2}
+  ],
+  "accessoriesType": [
+    {"name": "头顶", "type": "head"},
+    {"name": "耳朵", "type": "ear"},
+    {"name": "眼睛", "type": "eyes"},
+    {"name": "头发", "type": "hair"},
+    {"name": "脖颈", "type": "neck"},
+    {"name": "手部", "type": "hands"}
   ],
   "accessories": [
     {"name": "眼镜","trans": "glasses","type": "eyes"},
@@ -218,14 +216,15 @@
     {"name": "吊坠","trans": "pendant","type": "neck"},
     {"name": "项链","trans": "necklace","type": "neck"}
   ],
-  "accessories-position": [
+  "accessoriesState": [
     {"name": "倾斜","trans": "tilted_headwear","type": "head"},
     {"name": "湿发","trans": "wet_hair","type": "head"},
     {"name": "单边","trans": "single_earring","type": "ear"}
   ],
   "underwear": [
   ],
-  "cross-dressing": [
+  "crossDressing": [
+    {"name": "内衣","trans": "underwear","position": "body","race": ["拉米亚","海妖"]}
   ],
   "jumpsuit": [
     {"name": "连衫裤","trans": "jumpsuit","level": 2},
@@ -239,14 +238,16 @@
     {"name": "吊帶連衣裙","trans": "sundress","level": 1},
     {"name": "无袖连衣裙","trans": "sleeveless_dress","level": 1},
     {"name": "夏日长裙","trans": "summer_dress","level": 1},
-    {"name": "西装","trans": "suit","level": 1},
-    {"name": "晚会礼服","trans": "canonicals","level": 1},
-    {"name": "女仆装","trans": "maid","level": 1},
     {"name": "纳粹制服","trans": "ss_uniform","level": 1},
-    {"name": "白无垢","trans": "uchikake","level": 1},
-    {"name": "巫女服","trans": "miko","level": 1},
     {"name": "和服","trans": "kimono","level": 1},
     {"name": "旗袍","trans": "cheongsam","level": 1},
     {"name": "后妈裙","trans": "Hip-wrapped jumpsuit","level": 1}
+  ],
+  "uniform": [
+    {"name": "西装","trans": "suit"},
+    {"name": "晚会礼服","trans": "canonicals"},
+    {"name": "女仆装","trans": "maid"},
+    {"name": "白无垢","trans": "uchikake"},
+    {"name": "巫女服","trans": "miko"}
   ]
 }

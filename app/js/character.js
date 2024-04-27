@@ -13,17 +13,16 @@ function setName() {
     }
 }
 
-
 /** 设置地区，势力，根据地区确定种族，根据种族的天赋上限设置力量等级 */
 function setRegion() {
     Character.region.index = randomIntRound(1, 100);
-    let faction = getStorage("region.faction");
+    let faction = db.region.faction;
     faction = getDataRound(faction);
 
     Character.region.faction.id = faction.id;
     Character.region.faction.name = faction.name;
 
-    let country = getStorage("region.country");
+    let country = db.region.country;
     country = getDataFind(country, "faction", faction.name);
     country = getDataRound(country);
     Character.region.country.id = country.id;
@@ -35,25 +34,30 @@ function setRegion() {
 
 /** 根据地区设置种族 **/
 function setRace(race_tag) {
-    let race = getStorage('race.' + race_tag);
+    let race = db.race[race_tag];
     race = getDataRound(race);
+	initPanel(race);
     Character.race.id = race.id;
     Character.race.name = race.name;
     Character.race.longevity = race.longevity;
     Character.race.size = race.size;
     Character.race.level = race.level;
-    setStrength();
-    setAge();
-    setFace();
-    setEyes();
-    setHair();
-    setBody();
+    setStrength();// 力量体系
+    setAge();// 根据种族设置年龄
+    setFace();// 设置面孔
+    setEyes();// 设置眼睛
+    setHair();// 设置头发
+    setBody();// 设置身体与身高
+    setOutward();// 设置穿着
+    setDisposition()// 设置性格
+    setPower()// 设置体质序列
+    setWeapon()// 设置器魔
 
 }
 
 /** 能量等级 */
 function setStrength() {
-    let strength = getStorage('power.strength');
+    let strength = db.power.strength;
     strength = getDataUnderScope(strength, 'level', Character.race.level);
     strength = getDataRound(strength);
     Character.power.strength.index = randomIntRound(strength.energyMin, strength.energyMax);
@@ -69,34 +73,33 @@ function setAge() {
     Character.age = randomIntRound(ageMin, max);
 }
 
-
 /** 面部 */
 function setFace() {
-    Character.face.type = getDataRound(getStorage('face.type'), true);// 脸型
-    Character.face.brow = getDataRound(getStorage('face.brow'), true);// 眉
-    Character.face.makeup = getDataRound(getStorage('face.makeup'), true); // 妆容
-    Character.face.mouth = getDataRound(getStorage('face.mouth'), true);// 嘴
-    Character.face.mouth_status = getDataRound(getStorage('face.mouthStatus'), true);// 嘴状态
+    Character.face.type = getDataRound(db.face.type, true);// 脸型
+    Character.face.brow = getDataRound(db.face.brow, true);// 眉
+    Character.face.makeup = getDataRound(db.face.makeup, true); // 妆容
+    Character.face.mouth = getDataRound(db.face.mouth, true);// 嘴
+    Character.face.mouth_status = getDataRound(db.face.mouthStatus, true);// 嘴状态
 }
 
 /** 眼睛 */
 function setEyes() {
-    Character.eyes.shape = getDataRound(getStorage('eyes.shape'), true);// 眼型
-    Character.eyes.look = getDataRound(getStorage('eyes.look'), true);// 眼神，目光
-    Character.eyes.color = getDataRound(getStorage('eyes.color'), true);// 瞳色
-    if (Math.round((EYCL123 * (Character.power.strength.index * 0.1)) * 100) >= RandomInt(1000))
-        Character.eyes.diff = getDataRound(getDataExcept(getStorage('eyes.color'), 'name', Character.eyes.color), true);// 异瞳
+    Character.eyes.shape = getDataRound(db.eyes.shape, true);// 眼型
+    Character.eyes.look = getDataRound(db.eyes.look, true);// 眼神，目光
+    Character.eyes.color = getDataRound(db.eyes.color, true);// 瞳色
+    if (Math.round((EYCL123 * (Character.power.strength.index * 0.1)) * 100) >= randomInt(1000))
+        Character.eyes.diff = getDataRound(getDataExcept(db.eyes.color, 'name', Character.eyes.color), true);// 异瞳
 }
 
 /** 头发 */
 function setHair() {
-    let length = getDataRound(getStorage('hair.length'))
-    let type = getDataUpperScope(getStorage('hair.type'), 'level', length.level);
+    let length = getDataRound(db.hair.length)
+    let type = getDataUpperScope(db.hair.type, 'level', length.level);
     Character.hair.length = length.name;// 发长
     Character.hair.type = getDataRound(type, true);// 发形
-    Character.hair.bangs = getDataRound(getStorage('hair.bangs'), true);// 刘海
-    Character.hair.style = getDataRound(getStorage('hair.style'), true);// 发型
-    Character.hair.color = getDataRound(getStorage('hair.color'), true);// 发色
+    Character.hair.bangs = getDataRound(db.hair.bangs, true);// 刘海
+    Character.hair.style = getDataRound(db.hair.style, true);// 发型
+    Character.hair.color = getDataRound(db.hair.color, true);// 发色
     Character.hair.gradient = gradient();// 渐变
     Character.hair.highlight = highlight();// 挑染
 }
@@ -109,109 +112,169 @@ function setBody() {
         Character.body.unit = "M";
         Character.body.height /= 10;
     } else if (Character.race.size === 'mini') Character.body.height /= 10;
-    Character.body.color = getDataRound(getStorage('body.color'));// 肤色
-    Character.body.type = getDataRound(getStorage('body.type'));// 体型
+    Character.body.color = getDataRound(db.body.color,true);// 肤色
+    Character.body.type = getDataRound(db.body.type,true);// 体型
 }
 
+/** 设置服装 */
 function setOutward() {
+    let outward = db.outward;
     // 根据种族筛选出异装
     // 非异装种族随机出散装还是一体
-    let crossRace = getStorage('outward.crossRace');
-    if (crossRace.indexOf(Character.race.name) !== -1) {
+    if (outward.crossRace.indexOf(Character.race.name) !== -1) {
+        Character.outward.wearing_type = 'cross';
         // 特殊种族，特殊服装
+        // 身体，手臂，腰带
+        let cross = outward.crossDressing;
+
+        let cross_body = getDataRound(getDataInArray(getDataFind(cross, 'position', "body"), 'race', Character.race.name));
+
+        Character.outward.cross.body.name = cross_body.name;
+        Character.outward.cross.body.trans = cross_body.trans;
     } else {
-        let tag = randomIntRound(1, 10);
-        if (tag >= 7) {
-            // 一体
-            let jumpsuit = getStorage('outward.jumpsuit');
+        let length = outward.jumpsuit.length + outward.top.length + outward.uniform.length;
+        let tag = randomIntRound(1, length);
+        if (tag > outward.jumpsuit.length + outward.top.length) {
+            // 制服
+            Character.outward.wearing_type = 'uniform';
+
+            let key = tag - outward.jumpsuit.length - outward.top.length;
+            let uniform = outward.uniform[key - 1];
+
+            Character.outward.uniform.name = uniform.name;
+            Character.outward.uniform.trans = uniform.trans;
+        } else if (tag > outward.jumpsuit.length) {
+            // diy
+            let key = tag - outward.jumpsuit.length;
+            let top = outward.top[key - 1];
+            Character.outward.wearing_type = 'diy';
+            let coat = getDataRound(outward.coat);
+            let bottom = getDataRound(outward.bottom);
+            let socks = getDataRound(getDataUnderScope(outward.socks, 'level', bottom.socks));
+            let shoes = getDataRound(getDataUnderScope(outward.shoes, 'level', socks.level))
+
+            Character.outward.diy.top.name = top.name;
+            Character.outward.diy.top.trans = top.trans;
+
+            Character.outward.diy.coat.name = coat.name;
+            Character.outward.diy.coat.trans = coat.trans;
+
+            Character.outward.diy.bottom.name = bottom.name;
+            Character.outward.diy.bottom.trans = bottom.trans;
+
+            Character.outward.diy.socks.name = socks.name;
+            Character.outward.diy.socks.trans = socks.trans;
+
+            Character.outward.diy.shoes.name = shoes.name;
+            Character.outward.diy.shoes.trans = shoes.trans;
         } else {
-            // 散装
-            let top = getStorage('outward.top')
-            let coat = getStorage('outward.coat')
-            let bottom = getStorage('outward.bottom')
+            // 一体
+            let jumpsuit = outward.jumpsuit[tag - 1];
+            let socks = getDataRound(outward.socks);
+            let shoes = getDataRound(getDataUnderScope(outward.shoes, 'level', jumpsuit.level))
+            Character.outward.wearing_type = 'jumpsuit';
+
+            Character.outward.jumpsuit.wearing.name = jumpsuit.name;
+            Character.outward.jumpsuit.wearing.trans = jumpsuit.trans;
+
+            Character.outward.jumpsuit.socks.name = socks.name;
+            Character.outward.jumpsuit.socks.trans = socks.trans;
+
+            Character.outward.jumpsuit.shoes.name = shoes.name;
+            Character.outward.jumpsuit.shoes.trans = shoes.trans;
         }
     }
 
-
+    // 饰品
+    let tag = randomIntRound(0, 3)
+    let accessories = [];
+    let type = outward.accessoriesType.sort(() => Math.random() - 0.5);
+    for (let i = 0; i < tag; i++) {
+        let accessory = getDataRound(getDataFind(outward.accessories, 'type', type[i].type));
+        let state = {};
+        let state_tag = !randomIntRound(0, 1);
+        if (state_tag) {
+            let stateData = getDataRound(getDataFind(outward.accessoriesState, "type", type[i].type))
+            if (typeof stateData !== 'undefined') state = {name: stateData.name, trans: stateData.trans}
+        }
+        accessories.push({name: accessory.name, trans: accessory.trans, state: state})
+    }
+    Character.outward.accessories = accessories;
 }
 
-// 性格特质
-function setSoul() {
-    var mold_r = RandomInt(2);
-    var traits_r = RandomInt(2);
-    Character.soul.personal = mold_r === 0 ? BOXfilter1(localStorage.moldP) : BOXfilter1(localStorage.moldN);// 性格
-    Character.soul.connect = mold_r === traits_r ? ' 又 ' : ' 但 ';// 又但
-    Character.soul.traits = traits_r === 0 ? BOXfilter1(localStorage.traitsP) : BOXfilter1(localStorage.traitsN);// 解释
-    if (traits_r === 0 && RandomInt(100) <= 7) Character.soul.but = BOXfilter1(localStorage.traitsE);// 只不过
-    let data = getDataFromFilter4(localStorage.skill);
-    Character.soul.skill.name = data.name;
-    Character.soul.skill.desc = data.desc;
-    Character.soul.hobby = BOXfilter4(localStorage.hobby);
-    Character.soul.hunting.target = BOXfilter4(localStorage.huntingTargets);
+/** 性格，爱好，取向 */
+function setDisposition() {
+    var dis_flag = randomInt(2);
+    var desc_flag = randomInt(2);
+    let disposition = db.disposition;
+    Character.disposition.name = dis_flag === 0 ? getDataRound(disposition.good, true) : getDataRound(disposition.bad, true);// 性格
+    Character.disposition.but = dis_flag !== desc_flag;// 又但
+    Character.disposition.desc = desc_flag === 0 ? getDataRound(disposition.goodDesc, true) : getDataRound(disposition.badDesc, true);// 解释
+    if (randomInt(100) <= 7) 
+		Character.disposition.however = desc_flag === 0 ? getDataRound(disposition.goodHowever, true) : getDataRound(disposition.badHowever, true);// 只不过
+	
+	// 爱好目标
+	Character.disposition.hobby = getDataRound(disposition.hobby, true);
+	Character.disposition.hunting = getDataRound(disposition.huntingTargets, true);
 }
 
-// 外貌
-function setDress() {
-    // 服装
-    Character.dress.clothing = BOXfilter4(localStorage.clothing);
-    // 武器
-    let weapon = getDataFromFilter4(localStorage.weapon);
-    let weapon_effects = getDataFromFilter4(localStorage.weapon_effects);
-    Character.dress.weapon.name = weapon.name;
-    Character.dress.weapon.desc = weapon_effects.name;
+function setPower() {
+    let constitution = db.power.constitution;
+    let talent = db.power.talent;
+    let strength = Character.power.strength.level;
+
+    // 设置体质
+    constitution = getDataRound(constitution)
+	initPanel(constitution)
+
+    Character.power.constitution.name = constitution.name;
+    Character.power.constitution.pred = constitution.pred;
+    Character.power.constitution.prey = constitution.prey;
+
+    // 天赋序列
+    let flag = randomInt(1);
+    if (!flag) talent = getDataUnderScope(talent, 'level', strength);
+    else talent = getDataUpperScope(talent, 'level', strength)
+    talent = getDataRound(talent);
+	initPanel(talent)
+    Character.power.talent.name = talent.name;
+    Character.power.talent.desc = talent.desc;
+}
+
+/** 器魔 **/
+function setWeapon(){
+    let demon = db.weapon.demon;
+    let effects = db.weapon.effects;
+    let strength = Character.power.strength.level;
+    demon = getDataRound(getDataUnderScope(demon, 'level', strength));
+    effects = getDataRound(getDataUnderScope(effects, 'level', strength));
+	Character.weapon.demon.name = demon.name;
+	Character.weapon.demon.effects = effects.name;
+}
+
+/** 根据数据库初始化面板 */
+function initPanel(data){
+	let list = [ "appetite",
+	    "capacity",
+	    "hidden_rate",
+	    "toughness",
+	    "digest_speed",
+	    "absorb_rate"]
+	for(let key in data){
+		if(list.indexOf(key) !== -1){
+			// 这个数据里面有影响面板的因素，取最大值
+			let value = 0;
+			if(typeof data[key] == 'object'){
+				value = randomIntRound(data[key][0],data[key][1]);
+			}else{
+				value = data[key];
+			}
+			Character.panel[key] = Math.max(value,Character.panel[key]);
+		}
+	}
 }
 
 function setPanel() {
-    Character.panel.digest_speed = 0;
-    Character.panel.appetite = 0;
-    Character.panel.toughness = 0;
-    Character.panel.capacity = 0;
-    Character.panel.absorb_rate = 0;
-    Character.panel.hidden_rate = 0;
-    switch (Character.soul.hunting.target) {
-        case "巨灵族":
-            Character.panel.capacity = randomIntRound(4, 5);
-            Character.panel.hidden_rate = randomIntRound(3, 5);
-            break;
-        case "龙族":
-            Character.panel.capacity = randomIntRound(3, 5);
-            Character.panel.hidden_rate = randomIntRound(2, 5);
-            break;
-    }
-    switch (Character.soul.skill.name) {
-        case "生物压缩":
-            Character.panel.capacity = Math.max(Character.panel.capacity, 5);
-            Character.panel.hidden_rate = Math.max(Character.panel.hidden_rate, 5);
-            break;
-        case "巨大化":
-            Character.panel.capacity = Math.max(Character.panel.hidden_rate, 5);
-            Character.panel.hidden_rate = Math.max(Character.panel.hidden_rate, 5);
-            break;
-        case "饕餮":
-            Character.panel.capacity = Math.max(Character.panel.hidden_rate, 6);
-            Character.panel.hidden_rate = Math.max(Character.panel.hidden_rate, 6);
-            break;
-        case "心如止水":
-            Character.panel.toughness = Math.max(Character.panel.hidden_rate, 5);
-            break;
-        case "负重者":
-            Character.panel.toughness = Math.max(Character.panel.hidden_rate, 5);
-
-            break;
-        case "捕食者":
-            Character.panel.digest_speed = Math.max(Character.panel.hidden_rate, 5);
-            break;
-        case "超负荷":
-            Character.panel.digest_speed = Math.max(Character.panel.hidden_rate, 5);
-            Character.panel.toughness = Math.max(Character.panel.hidden_rate, 5);
-            Character.panel.capacity = Math.max(Character.panel.hidden_rate, 5);
-            Character.panel.hidden_rate = Math.max(Character.panel.hidden_rate, 5);
-            break;
-        case "钢铁武装":
-            Character.panel.toughness = 5;
-            break;
-    }
-
     let data = [];
     let indicator = [];
     for (let i in Character.panel) {
@@ -219,7 +282,6 @@ function setPanel() {
             Character.panel[i] = generatePanelNumber(i, Character.power.strength.index);
         }
         data.push(Character.panel[i])
-        // data.push(6)
         let name = "";
         switch (Character.panel[i]) {
             case 0:
@@ -250,7 +312,11 @@ function setPanel() {
 }
 
 //修改生成颜色
-function setBackground(X, Y) {
+function setBackground() {
+	let X = Character.age;
+	if (Character.age > 100) X = parseInt(Character.age / 10)
+	else if (Character.age > 1000) X = parseInt(Character.age / 100)
+	let Y = Character.region.index;
     let background_color = hslToRgb((X + Y) * 1.8 / 360, +((Y - 50) * 0.1 + 30) / 100, ((X - 50) * 0.1 + 50) / 100);
     Character.panel_settings.color = background_color;
     $('.bg_card').css("background-color", background_color);
@@ -265,9 +331,7 @@ function setBackground(X, Y) {
 
 function setOptions(data, indicator) {
     return {
-        // backgroundColor: '#161627',
         title: {
-            // text: 'AQI - Radar',
             left: 'center',
             textStyle: {
                 color: '#eee'
@@ -330,7 +394,6 @@ function setOptions(data, indicator) {
 }
 
 function tagBody() {
-    let type = "";
     let height = Character.body.height;
     if (Character.body.unit === "M") height *= 100;
     if (height > 200) {
@@ -347,27 +410,12 @@ function tagBody() {
     return type;
 }
 
-
-function tagPose() {
-    return BOXfilter1(localStorage.pose);// 姿势
-}
-
-
-function tagBackground() {
-    let baseBackground = BOXfilter1(localStorage.baseBackground);// 背景
-    let regionBackground = filterFroCondition(localStorage.regionBackground, 'region', Character.region.id);// 背景
-    return baseBackground + "," + regionBackground;
-}
-
-
 /** 设置阵营 */
 function setCamp() {
     Character.camp.index = randomIntRound(1, 100);
 
     let DBCampLeft = JSON.parse(localStorage.campLeft);
     let DBCampRight = JSON.parse(localStorage.campRight);
-    let left = '';
-    let right = '';
     let campLeftData = DBCampLeft.find(camp => camp.LL <= Character.camp.index);
     let campRightData = DBCampRight.find(camp => camp.LL <= randomIntRound(1, 100));
     left = campLeftData.name;

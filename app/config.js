@@ -49,19 +49,28 @@ let Character = {
         right: 0,
     },
     power: {// 力量坐标
-        strength:{
+        strength: {
             index: 0,
             show: '',
             level: 'E',
+        },
+        constitution: {
+            name: "",
+            pred: "",
+            prey: "",
+        },
+        talent: {
+            name: "",
+            desc: ""
         }
     },
     region: {// 区域坐标
         index: 0,
-        faction:{
+        faction: {
             id: 0,
             name: '',
         },
-        country:{
+        country: {
             id: 0,
             name: '',
         }
@@ -107,25 +116,68 @@ let Character = {
         color: '',
         type: '',
     },
-    soul: {
-        personal: '',
-        connect: '',
-        traits: '',
-        but: '',
-        skill: {
-            name: '',
-            desc: ''
+    outward: {
+        wearing_type: 'jumpsuit',
+        jumpsuit: {
+            wearing: {
+                name: "",
+                trans: ""
+            },
+            socks: {
+                name: "",
+                trans: "",
+            },
+            shoes: {
+                name: "",
+                trans: "",
+            }
         },
-        hobby: '',
-        hunting: {
-            target: '',
-        }
-    },
-    dress: {
-        clothing: '',
-        weapon: {
+        diy: {
+            top: {
+                name: "",
+                trans: "",
+            },
+            coat: {
+                name: "",
+                trans: "",
+            },
+            bottom: {
+                name: "",
+                trans: "",
+            },
+            socks: {
+                name: "",
+                trans: "",
+            },
+            shoes: {
+                name: "",
+                trans: "",
+            }
+        },
+        uniform: {
             name: "",
-            desc: "",
+            trans: "",
+        },
+        cross: {
+            body: {
+                name: "",
+                trans: "",
+            }
+        },
+        accessories: []
+    },
+    disposition: {
+        name: "",
+        but: "",
+        desc: "",
+        however: "",
+		hobby:"",
+		hunting:"",
+    },
+    weapon: {
+        demon: {
+            name: "",
+            effects: ""
         }
     },
     panel: {
