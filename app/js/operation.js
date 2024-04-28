@@ -34,7 +34,7 @@ $("#downloadBtn").click(function () {
 /** 复制文本 */
 $("#copyContent").click(function () {
     var content = $("#info-tag").text();
-    content = content.replace(/\n{2,}/g, '\n').replace(/^\n+|\n+$/g, '').replace(/^\n+|\n+$/g, ''); // 将多个换行符替换成一个换行符
+    content = content.replace(/\n{2,}/g, '\n').replace(/ {2,}/g, ' ').replace(/^\n+|\n+$/g, '').replace(/^\n+|\n+$/g, ''); // 将多个换行符替换成一个换行符
     navigator.clipboard.writeText(content).then();
 });
 

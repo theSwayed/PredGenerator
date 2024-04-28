@@ -124,7 +124,7 @@
     {"name": "泡泡袜","trans": "loose_socks", "level": 2}
   ],
   "shoes": [
-    {"name": "赤脚","trans": "no_shoes", "level": 0},
+    {"name": "赤脚","trans": "bare_foots", "level": 0},
     {"name": "小皮鞋","trans": "loafers", "level": 1},
     {"name": "运动鞋","trans": "sneakers", "level": 1},
     {"name": "居家鞋","trans": "uwabaki", "level": 0},
