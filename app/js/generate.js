@@ -137,7 +137,7 @@ function tagGenerate() {
         <p>[饰品:0],${getAccessoriesTags()},</p>
         <p>[背景:0],${getBackgroundTags()},</p>
         <p>[姿势:0],${getPoseTags()},</p>
-        <p>[角度:0],look at viewer,${getLensesTags()},</p>
+        <p>[角度:0],looking at viewer,${getLensesTags()},</p>
         `
     $("#info-tag").html(DNA1html.replace(/,+/g, ","));
 }
