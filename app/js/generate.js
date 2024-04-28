@@ -203,7 +203,7 @@ function getOutWardTags() {
     }
     // 衣服的特殊状态
     let state_flag = randomIntRound(1, 10)
-    if (state_flag >= 5) {
+    if (state_flag >= 8) {
         tags.push(getDataRound(db.outward.state, 'trans'));
     }
     return tags.join(",")
