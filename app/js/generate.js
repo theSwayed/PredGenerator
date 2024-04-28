@@ -27,7 +27,7 @@ function simpleGenerate() {
         <p>日常的穿搭是${getOutwardStr()}</p>
         `
     let DNA2html = ` 
-		<p>性格${getDispositionStr()}</p>
+		<p>${getDispositionStr()}</p>
         <p>喜欢<u>${Character.disposition.hobby}</u>。</p>
 		<p>天赋序列是<u>${Character.power.talent.name}</u>，<u>${Character.power.talent.desc}</u>。</p>
         <p>器魔是<u>${Character.weapon.demon.name}</u>，<u>${Character.weapon.demon.effects}</u>。</p>
@@ -39,7 +39,7 @@ function simpleGenerate() {
 		<p>这种体质<u>${Character.power.constitution.pred}</u>。</p>
 		<p>而一旦这种体质的拥有者成为了猎物，<u>${Character.power.constitution.prey}</u>。</p>`
     } else {
-        DNA2html += "<p>无特殊体质，是一名普普通通的捕食者。</p>"
+        DNA2html += "<p>无特殊体质，是一名普普通通的食者。</p>"
     }
     $("#screen-simple .desc1").html(DNA1html);
     $("#screen-simple .desc2").html(DNA2html);
@@ -113,7 +113,7 @@ function panelGenerate() {
         `
     if (Character.power.constitution.name) {
         DNA1html += `<p>特殊体质：${Character.power.constitution.name}</p>
-        <p>作为捕食者：${Character.power.constitution.pred}</p>
+        <p>作为食者：${Character.power.constitution.pred}</p>
         <p>作为猎物：${Character.power.constitution.prey}</p>`
     } else {
         DNA1html += `<p>特殊体质：无</p>`

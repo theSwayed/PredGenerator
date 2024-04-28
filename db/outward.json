@@ -115,7 +115,7 @@
     {"name": "裤袜","trans": "leggings", "level": 3},
     {"name": "长筒袜","trans": "legwear", "level": 2},
     {"name": "过膝袜","trans": "thighhighs", "level": 2},
-    {"name": "中筒袜","trans": "kneehighs", "level": 2},
+    {"name": "中筒袜","trans": "short kneehighs", "level": 2},
     {"name": "短袜","trans": "socks", "level": 2},
     {"name": "裸足","trans": "bare_legs", "level": 0},
     {"name": "渔网袜","trans": "stirrup_legwear", "level": 3},
