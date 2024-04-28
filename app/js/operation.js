@@ -19,7 +19,7 @@ $('.switch_tab div').click(function () {
 
 /** 将结果下载成图片 */
 $("#downloadBtn").click(function () {
-    let pngName = Character.name + "，" + Character.age + "岁的" + Character.race.main + getCall();
+    let pngName = Character.name + "，" + Character.age + "岁的" + Character.race.name + getCall();
     html2canvas(document.getElementById("download_content"), {
         allowTaint: true,
     }).then(canvas => {
