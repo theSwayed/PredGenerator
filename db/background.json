@@ -47,7 +47,7 @@
         {"name": "沉入星海", "trans": "stars in the eyes, depth of field"}
     ],
     "lenses": [
-        {"name": "聚焦在臀部","trans": "hip_focus"},
+      {"name": "聚焦在臀部","trans": "hip_focus"},
       {"name": "(突出)胸部","trans": "between_breasts,front view"},
       {"name": "偷窥(强调视角)","trans": "peeping,from_side"},
       {"name": "肚脐偷看","trans": "midriff_peek,from_side"},

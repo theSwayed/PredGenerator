@@ -1,3 +1,5 @@
+let bare_foot = false;
+
 function initPred() {
     Character = JSON.parse(localStorage.getItem('character'))
     // 设置名字
@@ -149,6 +151,7 @@ function getBodyTags() {
     ];
     let tagKeys = ["type", "color", "cup"];
     let bodyTags = makeTags('body', tagKeys)
+
     return tags.concat(bodyTags).join(",")
 }
 
@@ -206,6 +209,10 @@ function getOutWardTags() {
     if (state_flag >= 8) {
         tags.push(getDataRound(db.outward.state, 'trans'));
     }
+    if(tags.indexOf("bare_foots") !==-1){
+        bare_foot = true;
+    }
+    console.log("bare_foot",bare_foot)
     return tags.join(",")
 }
 
@@ -234,12 +241,12 @@ function getBackgroundTags() {
 }
 
 function getPoseTags() {
-    let tags = [];
-    let tagKeys = ["pose"]
-    for (let i in tagKeys) {
-        tags.push(getTrans(db.background[tagKeys[i]]))
+    let tags = "";
+        tags = getTrans(db.background.pose)
+    if(bare_foot) {
+        tags = tags.replace('standing','sitting')
     }
-    return tags.join(",")
+    return tags
 }
 
 function getLensesTags() {
