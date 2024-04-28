@@ -180,7 +180,6 @@
     {"name": "花环","trans": "head_wreath","type": "head"},
     {"name": "头冠","trans": "crown","type": "head"},
     {"name": "三角头饰","trans": "triangular_headpiece","type": "head"},
-    {"name": "耳机","trans": "headphones","type": "head"},
     {"name": "骨状饰品","trans": "bone_hair_ornament","type": "head"},
     {"name": "发带","trans": "hairband","type": "hair"},
     {"name": "洛丽塔发带","trans": "lolita_hairband","type": "hair"},
@@ -240,7 +239,7 @@
     {"name": "纳粹制服","trans": "ss_uniform","level": 1},
     {"name": "和服","trans": "kimono","level": 1},
     {"name": "旗袍","trans": "cheongsam","level": 1},
-    {"name": "后妈裙","trans": "Hip-wrapped jumpsuit","level": 1}
+    {"name": "后妈裙","trans": "hip-wrapped jumpsuit","level": 1}
   ],
   "uniform": [
     {"name": "西装","trans": "suit"},
