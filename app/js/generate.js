@@ -63,7 +63,7 @@ function panelGenerate() {
 
     let wearing = [];
     for (let i in Character.outward[Character.outward.wearing_type]) {
-        wearing.push(Character.outward[Character.outward.wearing_type][i].name)
+        wearing.push(Character.outward[Character.outward.wearing_type][i])
     }
     let wearingStr = wearing.join('，')
 
@@ -72,7 +72,7 @@ function panelGenerate() {
     if (accessories.length) {
         for (let i in accessories) {
             if (accessories[i].state.length)
-                accessStr.push(accessories[i].state.name + accessories[i].name)
+                accessStr.push(accessories[i].state + accessories[i].name)
             else accessStr.push(accessories[i].name);
         }
         accessStr = accessStr.join("、")
@@ -122,7 +122,9 @@ function tagGenerate() {
         <p>[主体:0],${getBodyTags()},</p>
         <p>[面部:0],${getFaceTags()},</p>
         <p>[眼睛:0],${getEyesTags()},</p>
-        <p>[穿着:0],,</p>
+        <p>[头发:0],${getHairTags()},</p>
+        <p>[穿着:0],${getOutWardTags()},</p>
+        <p>[饰品:0],${getAccessoriesTags()},</p>
         <p>[背景:0],,</p>
         <p>[动作:0],,</p>
         <p>[角度:0],look at viewer,</p>
@@ -154,8 +156,40 @@ function getEyesTags() {
     if (Character.eyes.diff)
         tags.push("heterochromia");
     tags = tags.concat(makeTags('eyes', ["color"]));
-    if (Character.eyes.diff){
+    if (Character.eyes.diff) {
         tags.push(getTrans(db.eyes.color, Character.eyes.diff))
+    }
+    return tags.join(",")
+}
+
+function getHairTags(){
+    return;
+}
+
+function getOutWardTags() {
+    let tags = [];
+    let tagKeys = Object.keys(Character.outward[Character.outward.wearing_type])
+    let data = [];
+    for (let i in tagKeys) {
+        console.log(tagKeys[i],db.outward[tagKeys[i]])
+        let tag = getTrans(db.outward[tagKeys[i]], Character.outward[Character.outward.wearing_type][tagKeys[i]]);
+        data.push(tag)
+    }
+    tags = tags.concat(data);
+    return tags.join(",")
+}
+
+function getAccessoriesTags() {
+    let tags = [];
+    let accessories = Character.outward.accessories;
+    if (accessories.length) {
+        for (let i in accessories) {
+            let accTrans = getTrans(db.outward.accessories, accessories[i].name);
+            if (accessories[i].state) {
+                accTrans += " " + getTrans(db.outward.accessoriesState, accessories[i].state);
+            }
+            tags.push(accTrans);
+        }
     }
     return tags.join(",")
 }
@@ -215,7 +249,7 @@ function highlight() {
 function getOutwardStr() {
     let wearing = [];
     for (let i in Character.outward[Character.outward.wearing_type]) {
-        wearing.push(`<u>${Character.outward[Character.outward.wearing_type][i].name}</u>`)
+        wearing.push(`<u>${Character.outward[Character.outward.wearing_type][i]}</u>`)
     }
     wearing = wearing.join("、")
 
@@ -225,7 +259,7 @@ function getOutwardStr() {
         wearing += "，喜欢";
         for (let i in accessories) {
             if (accessories[i].state.length)
-                accessStr.push("<u>" + accessories[i].state.name + accessories[i].name + "</u>")
+                accessStr.push("<u>" + accessories[i].state + accessories[i] + "</u>")
             else accessStr.push("<u>" + accessories[i].name + "</u>");
         }
         wearing += accessStr.join("、")

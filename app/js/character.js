@@ -131,20 +131,18 @@ function setOutward() {
 
         let cross_body = getDataRound(getDataInArray(getDataFind(cross, 'position', "body"), 'race', Character.race.name));
 
-        Character.outward.cross.body.name = cross_body.name;
-        Character.outward.cross.body.trans = cross_body.trans;
+        Character.outward.cross.body = cross_body.name;
     } else {
         let length = outward.jumpsuit.length + outward.top.length + outward.uniform.length;
         let tag = randomIntRound(1, length);
         if (tag > outward.jumpsuit.length + outward.top.length) {
             // 制服
-            Character.outward.wearing_type = 'uniform';
+            Character.outward.wearing_type = 'whole';
 
             let key = tag - outward.jumpsuit.length - outward.top.length;
             let uniform = outward.uniform[key - 1];
 
-            Character.outward.uniform.suit.name = uniform.name;
-            Character.outward.uniform.suit.trans = uniform.trans;
+            Character.outward.whole.uniform = uniform.name;
         } else if (tag > outward.jumpsuit.length) {
             // diy
             let key = tag - outward.jumpsuit.length;
@@ -155,20 +153,15 @@ function setOutward() {
             let socks = getDataRound(getDataUnderScope(outward.socks, 'level', bottom.socks));
             let shoes = getDataRound(getDataUnderScope(outward.shoes, 'level', socks.level))
 
-            Character.outward.diy.top.name = top.name;
-            Character.outward.diy.top.trans = top.trans;
+            Character.outward.diy.top = top.name;
 
-            Character.outward.diy.coat.name = coat.name;
-            Character.outward.diy.coat.trans = coat.trans;
+            Character.outward.diy.coat = coat.name;
 
-            Character.outward.diy.bottom.name = bottom.name;
-            Character.outward.diy.bottom.trans = bottom.trans;
+            Character.outward.diy.bottom = bottom.name;
 
-            Character.outward.diy.socks.name = socks.name;
-            Character.outward.diy.socks.trans = socks.trans;
+            Character.outward.diy.socks = socks.name;
 
-            Character.outward.diy.shoes.name = shoes.name;
-            Character.outward.diy.shoes.trans = shoes.trans;
+            Character.outward.diy.shoes = shoes.name;
         } else {
             // 一体
             let jumpsuit = outward.jumpsuit[tag - 1];
@@ -176,14 +169,11 @@ function setOutward() {
             let shoes = getDataRound(getDataUnderScope(outward.shoes, 'level', jumpsuit.level))
             Character.outward.wearing_type = 'jumpsuit';
 
-            Character.outward.jumpsuit.wearing.name = jumpsuit.name;
-            Character.outward.jumpsuit.wearing.trans = jumpsuit.trans;
+            Character.outward.jumpsuit.jumpsuit = jumpsuit.name;
 
-            Character.outward.jumpsuit.socks.name = socks.name;
-            Character.outward.jumpsuit.socks.trans = socks.trans;
+            Character.outward.jumpsuit.socks = socks.name;
 
-            Character.outward.jumpsuit.shoes.name = shoes.name;
-            Character.outward.jumpsuit.shoes.trans = shoes.trans;
+            Character.outward.jumpsuit.shoes = shoes.name;
         }
     }
 
@@ -193,13 +183,13 @@ function setOutward() {
     let type = outward.accessoriesType.sort(() => Math.random() - 0.5);
     for (let i = 0; i < tag; i++) {
         let accessory = getDataRound(getDataFind(outward.accessories, 'type', type[i].type));
-        let state = {};
+        let state = "";
         let state_tag = !randomIntRound(0, 1);
         if (state_tag) {
             let stateData = getDataRound(getDataFind(outward.accessoriesState, "type", type[i].type))
-            if (typeof stateData !== 'undefined') state = {name: stateData.name, trans: stateData.trans}
+            if (typeof stateData !== 'undefined') state = stateData.name
         }
-        accessories.push({name: accessory.name, trans: accessory.trans, state: state})
+        accessories.push({name: accessory.name, state: state})
     }
     Character.outward.accessories = accessories;
 }

@@ -114,52 +114,22 @@ let Character = {
     outward: {
         wearing_type: 'jumpsuit',
         jumpsuit: {
-            wearing: {
-                name: "",
-                trans: ""
-            },
-            socks: {
-                name: "",
-                trans: "",
-            },
-            shoes: {
-                name: "",
-                trans: "",
-            }
+            jumpsuit: "",
+            socks: "",
+            shoes: ""
         },
         diy: {
-            top: {
-                name: "",
-                trans: "",
-            },
-            coat: {
-                name: "",
-                trans: "",
-            },
-            bottom: {
-                name: "",
-                trans: "",
-            },
-            socks: {
-                name: "",
-                trans: "",
-            },
-            shoes: {
-                name: "",
-                trans: "",
-            }
+            top: "",
+            coat: "",
+            bottom: "",
+            socks: "",
+            shoes: ""
         },
-        uniform: {
-            suit: {
-                name: "",
-                trans: "",
-            }
+        whole: {
+            uniform: ""
         },
         cross: {
-            body: {
-                name: "",
-                trans: "",
-            }
+            body: ""
         },
         accessories: []
     },
