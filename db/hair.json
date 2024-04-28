@@ -42,8 +42,8 @@
         {"name":"双丸子头","trans":"half_bun_hair", "level": 2},
         {"name":"侧马尾","trans":"side_ponytail", "level": 2},
         {"name":"人妻头","trans":"single scorpion-braid hair,Hair on the shoulders", "level": 2},
-        {"name":"簪发","trans":"straight_hair", "level": 3},
-        {"name":"盘发","trans":"straight_hair", "level": 3}
+        {"name":"簪发","trans":"hairpin", "level": 3},
+        {"name":"盘发","trans":"updo hair", "level": 3}
     ],
     "color":[
         {"name":"黑色","trans": "black hair"},
