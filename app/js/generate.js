@@ -24,7 +24,7 @@ function simpleGenerate() {
         <p>${getEyesStr()}<u>${Character.eyes.shape}</u>，<u>${Character.face.brow}</u>，目光<u>${Character.eyes.look}</u>。</p>
         <p><u>${Character.face.mouth}${Character.face.mouth_status}</u>，妆容<u>${Character.face.makeup}</u>。</p>
         <p>一头${getHairStr()}的<u>${Character.hair.length}${Character.hair.type}</u>梳成<u>${Character.hair.bangs}</u>的<u>${Character.hair.style}</u>。</p>
-        <p>日常的穿搭是${getOutwardStr()}</p>
+        <p>日常的穿搭是${getOutwardStr()}。</p>
         `
     let DNA2html = ` 
 		<p>${getDispositionStr()}</p>
