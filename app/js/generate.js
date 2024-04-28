@@ -1,13 +1,11 @@
 function initPred() {
+    Character = JSON.parse(localStorage.getItem('character'))
     // 设置名字
     setName();
     // 设置种族，兼容上级数据，链式操作
     setRegion();
-
     setBackground();
-    //
     setPanel();
-
 }
 
 function generate() {
@@ -19,9 +17,8 @@ function generate() {
 function simpleGenerate() {
     //输出
     let DNA1html =
-        `<p>一位有着<u>${Character.power.strength.name}</u>魔力，来自<u>${Character.region.faction.name}</u>的<u>${Character.race.name}</u>${getCall()}。</p>
-		<p>国籍是<u>${Character.region.country.name}</u>。</p>
-        <p>身高<u>${Character.body.height}</u>${Character.body.unit}，肤色<u>${Character.body.color}</u>，<u>${Character.body.type}</u>，有着一张<u>${Character.face.type}</u>。</p>
+        `<p>一位有着<u>${Character.power.strength.name}</u>魔力，来自<u>${Character.region.faction.name}</u>，<u>${Character.region.country.name}</u>势力的<u>${Character.race.name}</u>${getCall()}。</p>
+        <p>身高<u>${Character.body.height}</u>${Character.body.unit}，肤色<u>${Character.body.color}</u>，<u>${Character.body.cup}</u>，<u>${Character.body.type}</u>，有着一张<u>${Character.face.type}</u>。</p>
         <p>${getEyesStr()}<u>${Character.eyes.shape}</u>，<u>${Character.face.brow}</u>，目光<u>${Character.eyes.look}</u>。</p>
         <p><u>${Character.face.mouth}${Character.face.mouth_status}</u>，妆容<u>${Character.face.makeup}</u>。</p>
         <p>一头${getHairStr()}的<u>${Character.hair.length}${Character.hair.type}</u>梳成<u>${Character.hair.bangs}</u>的<u>${Character.hair.style}</u>。</p>
@@ -32,11 +29,16 @@ function simpleGenerate() {
         <p>喜欢<u>${Character.disposition.hobby}</u>。</p>
 		<p>天赋序列是<u>${Character.power.talent.name}，${Character.power.talent.desc}</u>。</p>
         <p>器魔是<u>${Character.weapon.demon.name}</u>，<u>${Character.weapon.demon.effects}</u>。</p>
-        <p>更倾向于将<u>${Character.disposition.hunting}</u>视为自己的猎物。</p>
-        <p>作为一名捕食者，拥有着名为<u>${Character.power.constitution.name}</u>的特殊体质。</p>
-		<p>这种体质<u>${Character.power.constitution.pred}</u>。</p>
-		<p>而一旦这种体质的拥有者成为了猎物，<u>${Character.power.constitution.prey}</u>。</p>
+        <p>更倾向于将<u>${Character.disposition.hunting}</u>视为自己的猎物。</p>    
 `;
+    if (Character.power.constitution.name) {
+        DNA2html += `
+        <p>拥有着名为<u>${Character.power.constitution.name}</u>的特殊体质。</p>
+		<p>这种体质<u>${Character.power.constitution.pred}</u>。</p>
+		<p>而一旦这种体质的拥有者成为了猎物，<u>${Character.power.constitution.prey}</u>。</p>`
+    } else {
+        DNA2html += "<p>无特殊体质，是一名普普通通的捕食者。</p>"
+    }
     $("#screen-simple .desc1").html(DNA1html);
     $("#screen-simple .desc2").html(DNA2html);
 }
@@ -91,7 +93,7 @@ function panelGenerate() {
                 </div>
                 <div>
                     <p>地区：${Character.region.faction.name}</p>
-                    <p>国籍：${Character.region.country.name}</p>
+                    <p>势力：${Character.region.country.name}</p>
                     <p>爱好：${Character.disposition.hobby}</p>
                     <p>狩猎对象：${Character.disposition.hunting}</p>
                 </div>
@@ -106,9 +108,15 @@ function panelGenerate() {
         <p>日常穿搭：${wearingStr}</p>
         <p>喜欢的饰品：${accessStr}</p>
         <br>
-        <p>体质：${Character.power.constitution.name}</p>
+        `
+    if (Character.power.constitution.name) {
+        DNA1html += `<p>特殊体质：${Character.power.constitution.name}</p>
         <p>作为捕食者：${Character.power.constitution.pred}</p>
-        <p>作为猎物：${Character.power.constitution.prey}</p>
+        <p>作为猎物：${Character.power.constitution.prey}</p>`
+    } else {
+        DNA1html += `<p>特殊体质：无</p>`
+    }
+    DNA1html += `
         <p>天赋序列：${Character.power.talent.name}</p>
         <p>序列描述：${Character.power.talent.desc}</p>
         <p>器魔：${Character.weapon.demon.name}</p>
@@ -119,17 +127,17 @@ function panelGenerate() {
 
 function tagGenerate() {
     let DNA1html = `
-        <p>[主体:0],${getBodyTags()},</p>
+        <p>[身体:0],${getBodyTags()},</p>
         <p>[面部:0],${getFaceTags()},</p>
         <p>[眼睛:0],${getEyesTags()},</p>
         <p>[头发:0],${getHairTags()},</p>
         <p>[穿着:0],${getOutWardTags()},</p>
         <p>[饰品:0],${getAccessoriesTags()},</p>
-        <p>[背景:0],,</p>
-        <p>[动作:0],,</p>
-        <p>[角度:0],look at viewer,</p>
+        <p>[背景:0],${getBackgroundTags()},</p>
+        <p>[姿势:0],${getPoseTags()},</p>
+        <p>[角度:0],look at viewer,${getLensesTags()}</p>
         `
-    $("#info-tag").html(DNA1html);
+    $("#info-tag").html(DNA1html.replace(/,+/g, ","));
 }
 
 function getBodyTags() {
@@ -162,20 +170,42 @@ function getEyesTags() {
     return tags.join(",")
 }
 
-function getHairTags(){
-    return;
+function getHairTags() {
+    let tags = [];
+    let tagKeys = ["type", "length", "bangs", "style", "color"]
+    tags = tags.concat(makeTags('hair', tagKeys));
+    if (Character.hair.gradient) {// 渐变
+        tags.push("gradient");
+        tags.push(getTrans(db.hair.color, Character.hair.gradient))
+    }
+    if (Character.hair.gradient) {// 挑染
+        tags.push("gradient");
+        tags.push(getTrans(db.hair.color, Character.hair.gradient))
+    }
+    return tags.join(",")
 }
 
 function getOutWardTags() {
     let tags = [];
-    let tagKeys = Object.keys(Character.outward[Character.outward.wearing_type])
-    let data = [];
-    for (let i in tagKeys) {
-        console.log(tagKeys[i],db.outward[tagKeys[i]])
-        let tag = getTrans(db.outward[tagKeys[i]], Character.outward[Character.outward.wearing_type][tagKeys[i]]);
-        data.push(tag)
+    if (Character.outward.wearing_type === 'crossDressing') {
+        let dressing = Character.outward.crossDressing;
+        for (const position in dressing) {
+            tags.push(getTrans(db.outward.crossDressing, dressing[position]))
+        }
+    } else {
+        let tagKeys = Object.keys(Character.outward[Character.outward.wearing_type])
+        let data = [];
+        for (let i in tagKeys) {
+            let tag = getTrans(db.outward[tagKeys[i]], Character.outward[Character.outward.wearing_type][tagKeys[i]]);
+            data.push(tag)
+        }
+        tags = tags.concat(data);
     }
-    tags = tags.concat(data);
+    // 衣服的特殊状态
+    let state_flag = randomIntRound(1, 10)
+    if (state_flag >= 5) {
+        tags.push(getDataRound(db.outward.state, 'trans'));
+    }
     return tags.join(",")
 }
 
@@ -190,6 +220,33 @@ function getAccessoriesTags() {
             }
             tags.push(accTrans);
         }
+    }
+    return tags.join(",")
+}
+
+function getBackgroundTags() {
+    let tags = [];
+    let tagKeys = ["environment", "scenes"]
+    for (let i in tagKeys) {
+        tags.push(getTrans(db.background[tagKeys[i]]))
+    }
+    return tags.join(",")
+}
+
+function getPoseTags() {
+    let tags = [];
+    let tagKeys = ["pose"]
+    for (let i in tagKeys) {
+        tags.push(getTrans(db.background[tagKeys[i]]))
+    }
+    return tags.join(",")
+}
+
+function getLensesTags() {
+    let tags = [];
+    let tagKeys = ["lenses",]
+    for (let i in tagKeys) {
+        tags.push(getTrans(db.background[tagKeys[i]]))
     }
     return tags.join(",")
 }
@@ -259,7 +316,7 @@ function getOutwardStr() {
         wearing += "，喜欢";
         for (let i in accessories) {
             if (accessories[i].state.length)
-                accessStr.push("<u>" + accessories[i].state + accessories[i] + "</u>")
+                accessStr.push("<u>" + accessories[i].state + accessories[i].name + "</u>")
             else accessStr.push("<u>" + accessories[i].name + "</u>");
         }
         wearing += accessStr.join("、")

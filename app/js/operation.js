@@ -1,3 +1,4 @@
+
 chartDom = document.getElementById('panel');
 myChart = echarts.init(chartDom);
 /** tab切换逻辑 */

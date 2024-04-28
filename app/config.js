@@ -128,7 +128,7 @@ let Character = {
         whole: {
             uniform: ""
         },
-        cross: {
+        crossDressing: {
             body: ""
         },
         accessories: []

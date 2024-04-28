@@ -248,5 +248,17 @@
     {"name": "女仆装","trans": "maid"},
     {"name": "白无垢","trans": "uchikake"},
     {"name": "巫女服","trans": "miko"}
+  ],
+  "state": [
+    {"name": "脱衣服中","trans": "undressing"},
+    {"name": "褪下衣物","trans": "clothes_down"},
+    {"name": "掀起衬衫","trans": "shirt_lift"},
+    {"name": "衬衫拉下来","trans": "shirt_pull"},
+    {"name": "拖拽衣服","trans": "clothes_tug"},
+    {"name": "衣服滑落","trans": "wardrobe_error"},
+    {"name": "脱下衬衫","trans": "shirt_removed"},
+    {"name": "湿衬衫","trans": "wet_shirt"},
+    {"name": "衣服出了意外","trans": "wardrobe_malfunction"},
+    {"name": "纽扣之间的缝隙","trans": "button_gap"}
   ]
 }

@@ -12,45 +12,42 @@
         {"name":"三角脸","trans": "triangular face"}
     ],
     "brow":[
-        {"name":"细眉"},
-        {"name":"柳叶眉"},
-        {"name":"月牙眉"},
-        {"name":"一字眉"},
-        {"name":"八字眉"},
-        {"name":"乱眉"},
-        {"name":"豆豆眉"},
-        {"name":"鬼眉"}
+        {"name":"细眉","trans": "fine eyebrows"},
+        {"name":"柳叶眉","trans": "arched eyebrows"},
+        {"name":"月牙眉","trans": "crescent eyebrow"},
+        {"name":"一字眉","trans": "synophrys"},
+        {"name":"八字眉","trans": "slanted eyebrows"},
+        {"name":"乱眉","trans": "chaotic eyebrows"},
+        {"name":"豆豆眉","trans": "doudou eyebrow"}
     ],
     "makeup":[
-        {"name":"自然清新"},
-        {"name":"淡洁素雅"},
-        {"name":"柔美优雅"},
-        {"name":"柔和甜美"},
-        {"name":"轻熟富韵"},
-        {"name":"素颜纯美"},
-        {"name":"清新淡雅"},
-        {"name":"低调朴素"}
+        {"name":"自然清新","trans": "(makeup:0.5)"},
+        {"name":"淡洁素雅","trans": "(makeup:0.5)"},
+        {"name":"柔美优雅","trans": "(makeup:0.5)"},
+        {"name":"柔和甜美","trans": "(makeup:0.6)"},
+        {"name":"轻熟富韵","trans": "(makeup:0.8)"},
+        {"name":"素颜纯美","trans": "(makeup:0.7)"},
+        {"name":"清新淡雅","trans": "(makeup:0.6)"},
+        {"name":"低调朴素","trans": "(makeup:0.4)"}
     ],
     "mouth":[
-        {"name":"细唇"},
-        {"name":"丰唇"},
-        {"name":"薄唇"},
-        {"name":"弓唇"},
-        {"name":"樱唇"}
+        {"name":"细唇","trans": "thin lips"},
+        {"name":"丰唇","trans": "Plump lips"},
+        {"name":"薄唇","trans": "thin lips"},
+        {"name":"樱唇","trans": "small lips"}
     ],
     "mouth_status":[
-        {"name":"红润"},
-        {"name":"淡雅"},
-        {"name":"晶莹"},
-        {"name":"苍白"},
-        {"name":"柔软"},
-        {"name":"娇嫩"},
-        {"name":"柔和"},
-        {"name":"娇艳"},
-        {"name":"甜美"},
-        {"name":"性感"},
-        {"name":"光泽"},
-        {"name":"妩媚"},
-        {"name":"清新"}
+        {"name":"红润","trans": "(light ruddy lips:0.6)"},
+        {"name":"淡雅","trans": "(light ruddy lips:0.5)"},
+        {"name":"晶莹","trans": "(light lips:0.7)"},
+        {"name":"苍白","trans": "(soft lips:0.4)"},
+        {"name":"柔软","trans": "(soft lips:0.6)"},
+        {"name":"娇嫩","trans": "(delicate lips:0.7)"},
+        {"name":"柔和","trans": "(soft lips:0.7)"},
+        {"name":"娇艳","trans": "(light ruddy lips:0.9)"},
+        {"name":"甜美","trans": "(sweet lips:0.7)"},
+        {"name":"性感","trans": "(sexy lips:0.5)"},
+        {"name":"妩媚","trans": "(sexy lips:0.7)"},
+        {"name":"清新","trans": "((light ruddy lips:0.5)"}
     ]
 }

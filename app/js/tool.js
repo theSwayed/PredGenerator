@@ -17,10 +17,10 @@ function getDataExcept(data, key, value) {
 }
 
 function getTrans(data, name) {
-    data = getDataFind(data, 'name', name);
-    // console.log(data,name)
-    if (typeof data[0].trans === 'string') return data[0].trans;
-    else return name;
+    if (name) data = getDataRound(getDataFind(data, 'name', name));
+    else data = getDataRound(data)
+    if (typeof data.trans === 'string') return data.trans;
+    else return data.name;
 }
 
 function makeTags(type, tags) {
@@ -32,9 +32,10 @@ function makeTags(type, tags) {
     return data;
 }
 
-function getDataRound(data, value = false) {
+function getDataRound(data, value) {
     let res = data[[randomInt(data.length)]];
-    if (value) return res.name;
+    if (value === true) return res.name;
+    if (typeof value === 'string') return res[value];
     return res;
 }
 
@@ -198,7 +199,7 @@ function splitString(input) {
 }
 
 /** 生成面板数值 */
-function generatePanelNumber(type, param) {
+function generatePanelInt(type, param) {
     // 生成1到100的随机整数
     var randomNumber = Math.floor(Math.random() * 100) + 1;
     if (randomNumber === 0) randomNumber = 1;
@@ -243,7 +244,7 @@ function getComplementaryColor(hex) {
     return rgbToHex(complementaryRgb.r, complementaryRgb.g, complementaryRgb.b);
 }
 
-function generateRandomHeight(age) {
+function randomIntPowerPositive(age) {
     // 计算均值和标准差
     let mean = 160; // 平均身高
     let stdDev = 40; // 标准差
@@ -255,4 +256,15 @@ function generateRandomHeight(age) {
     // 生成随机身高
     let height = Math.ceil(adjustedMean + (Math.random() * 2 - 1) * adjustedStdDev);
     return Math.max(heightMIN, Math.min(height, heightMAX));
+}
+
+/** 生成面板数值 */
+function randomIntPowerNegative(weight, max) {
+    // 确保权重至少为1，避免0或负数权重造成问题
+    weight = Math.max(1, weight);
+    // 生成一个0到1之间的随机数，然后通过权重调整其分布
+    let rand = Math.pow(Math.random(), 1 / weight);
+    // 将调整后的随机数映射到指定的范围内（0到max）
+    let result = Math.floor(rand * max);
+    return result;
 }

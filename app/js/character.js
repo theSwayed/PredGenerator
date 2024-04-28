@@ -17,10 +17,12 @@ function setName() {
 function setRegion() {
     Character.region.index = randomIntRound(1, 100);
     let faction = db.region.faction;
-    faction = getDataRound(faction);
 
+    // faction = getDataFind(faction, 'name', "幽冥谷")
+    faction = getDataRound(faction);
     Character.region.faction.id = faction.id;
     Character.region.faction.name = faction.name;
+
     Character.region.faction.race_type = getDataRound(faction.raceType);
 
     let country = db.region.country;
@@ -37,6 +39,7 @@ function setRegion() {
 function setRace() {
     let race_type = Character.region.faction.race_type
     let race = db.race[race_type];
+    // race = getDataFind(race, 'name', "海妖")
     race = getDataRound(race);
     initPanel(race);
     Character.race.id = race.id;
@@ -107,7 +110,7 @@ function setHair() {
 
 /** 设置身高和单位，以及身体特征 */
 function setBody() {
-    Character.body.height = generateRandomHeight(Character.age);
+    Character.body.height = randomIntPowerPositive(Character.age);
     Character.body.unit = "Cm";
     if (Character.race.size === 'huge') {
         Character.body.unit = "M";
@@ -124,14 +127,12 @@ function setOutward() {
     // 根据种族筛选出异装
     // 非异装种族随机出散装还是一体
     if (outward.crossRace.indexOf(Character.race.name) !== -1) {
-        Character.outward.wearing_type = 'cross';
+        Character.outward.wearing_type = 'crossDressing';
         // 特殊种族，特殊服装
         // 身体，手臂，腰带
         let cross = outward.crossDressing;
-
         let cross_body = getDataRound(getDataInArray(getDataFind(cross, 'position', "body"), 'race', Character.race.name));
-
-        Character.outward.cross.body = cross_body.name;
+        Character.outward.crossDressing.body = cross_body.name;
     } else {
         let length = outward.jumpsuit.length + outward.top.length + outward.uniform.length;
         let tag = randomIntRound(1, length);
@@ -211,17 +212,23 @@ function setDisposition() {
 }
 
 function setPower() {
-    let constitution = db.power.constitution;
     let talent = db.power.talent;
     let strength = Character.power.strength.level;
 
     // 设置体质
-    constitution = getDataRound(constitution)
-    initPanel(constitution)
-
-    Character.power.constitution.name = constitution.name;
-    Character.power.constitution.pred = constitution.pred;
-    Character.power.constitution.prey = constitution.prey;
+    let const_flag = randomIntPowerNegative(Character.power.strength.level, 100);
+    if (const_flag > 80) {
+        let constitution = db.power.constitution;
+        constitution = getDataRound(constitution)
+        initPanel(constitution)
+        Character.power.constitution.name = constitution.name;
+        Character.power.constitution.pred = constitution.pred;
+        Character.power.constitution.prey = constitution.prey;
+    }else{
+		Character.power.constitution.name = "";
+		Character.power.constitution.pred = "";
+		Character.power.constitution.prey = "";
+	}
 
     // 天赋序列
     let flag = randomInt(1);
@@ -246,12 +253,14 @@ function setWeapon() {
 
 /** 根据数据库初始化面板 */
 function initPanel(data) {
-    let list = ["appetite",
+    let list = [
+		"appetite",
         "capacity",
         "hidden_rate",
         "toughness",
         "digest_speed",
-        "absorb_rate"]
+        "absorb_rate"
+		]
     for (let key in data) {
         if (list.indexOf(key) !== -1) {
             // 这个数据里面有影响面板的因素，取最大值
@@ -271,7 +280,7 @@ function setPanel() {
     let indicator = [];
     for (let i in Character.panel) {
         if (!Character.panel[i]) {
-            Character.panel[i] = generatePanelNumber(i, Character.power.strength.index);
+            Character.panel[i] = generatePanelInt(i, Character.power.strength.index);
         }
         data.push(Character.panel[i])
         let name = "";

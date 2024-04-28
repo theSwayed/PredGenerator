@@ -65,6 +65,8 @@ function loadAPP() {
             db[name][key] = getStorage(name + "." + key);
         });
     });
+	setStorage('character', Character)
+	localStorage.setItem('character', JSON.stringify(Character));
     $.getScript('app/js/tool.js')
     $.getScript('app/js/character.js')
     $.getScript('app/js/operation.js')

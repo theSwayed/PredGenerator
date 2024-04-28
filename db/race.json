@@ -5,7 +5,7 @@
 		"capacity":[4, 5],
 		"hidden_rate":[3, 5]
 		},
-        {"id": 14,"name":"妖精","trans": "fairy_wings","level":4, "size": "mini", "longevity": 1},
+        {"id": 14,"name":"妖精","trans": "fairy_wings,tiny girl","level":4, "size": "mini", "longevity": 1},
         {"id": 16,"name":"精灵","trans": "elf ears","level":5, "size": "normal", "longevity": 1},
         {"id": 17,"name":"仙灵","trans": "fairy_wings","level":6, "size": "normal", "longevity": 1}
     ],
@@ -23,7 +23,7 @@
     ],
     "monster": [
         {"id": 12,"name":"树妖","trans": "fairy_wings","level":2, "size": "normal", "longevity": 1},
-        {"id": 7,"name":"海妖","trans": "fish tail","level":3, "size": "normal", "longevity": 0},
+        {"id": 7,"name":"海妖","trans": "(incredibly absurdres), (highly detailed beautiful fishtail:1.6), (((human hands))), (the lower body is a fish:1.9)AND(no human thigh:1.2), (curved and slender fish tail), (the lower body is bare:1.1), {beautiful tailfin}, (illustration),  (detailed scales on a mermaid),","level":3, "size": "normal", "longevity": 0},
         {"id": 3,"name":"魅魔","trans": "demon girl,demon tail,","level":1, "size": "normal", "longevity": 0},
         {"id": 6,"name":"拉米亚","trans": "lamia,snake tail","level":2, "size": "normal", "longevity": 0,
 		"capacity":[3, 5]
