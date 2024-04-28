@@ -22,12 +22,12 @@ function simpleGenerate() {
         <p>${getEyesStr()}<u>${Character.eyes.shape}</u>，<u>${Character.face.brow}</u>，目光<u>${Character.eyes.look}</u>。</p>
         <p><u>${Character.face.mouth}${Character.face.mouth_status}</u>，妆容<u>${Character.face.makeup}</u>。</p>
         <p>一头${getHairStr()}的<u>${Character.hair.length}${Character.hair.type}</u>梳成<u>${Character.hair.bangs}</u>的<u>${Character.hair.style}</u>。</p>
-        <p>日常的打扮是${getOutwardStr()}</p>
+        <p>日常的穿搭是${getOutwardStr()}</p>
         `
     let DNA2html = ` 
 		<p>性格${getDispositionStr()}</p>
         <p>喜欢<u>${Character.disposition.hobby}</u>。</p>
-		<p>天赋序列是<u>${Character.power.talent.name}，${Character.power.talent.desc}</u>。</p>
+		<p>天赋序列是<u>${Character.power.talent.name}</u>，<u>${Character.power.talent.desc}</u>。</p>
         <p>器魔是<u>${Character.weapon.demon.name}</u>，<u>${Character.weapon.demon.effects}</u>。</p>
         <p>更倾向于将<u>${Character.disposition.hunting}</u>视为自己的猎物。</p>    
 `;
