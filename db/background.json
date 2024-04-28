@@ -59,11 +59,6 @@
       {"name": "聚焦在脚上","trans": "foot_focus,from_below"}
     ],
     "pose": [
-        {"name": "坐着面向别处", "trans": "sitting,facing_away"},
-        {"name": "坐着看向侧面", "trans": "sitting,looking_to_the_side"},
-        {"name": "坐着遥望", "trans": "sitting,looking_afar"},
-        {"name": "坐着歪头", "trans": "sitting,head_tilt"},
-        {"name": "坐着低头", "trans": "sitting,head_down"},
         {"name": "站着面向别处", "trans": "standing,facing_away"},
         {"name": "站着看向侧面", "trans": "standing,looking_to_the_side"},
         {"name": "站着遥望", "trans": "standing,looking_afar"},

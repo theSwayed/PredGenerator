@@ -3,7 +3,6 @@ html, body {
     padding: 0;
     position: relative;
     min-height: 100%;
-    padding-bottom: 5rem;
     color: #464637
 }
 
@@ -370,4 +369,15 @@ input.kaiguan, #warning {
     -moz-user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
+}
+
+#foot{
+    position: fixed;
+    left:0;
+    right: 0;
+    bottom: 0;
+    background: #3c485e;
+}
+#foot::before{
+    clear: both;
 }
