@@ -180,11 +180,11 @@ function randomIntPowerPositive(age) {
     return Math.max(heightMIN, Math.min(height, heightMAX));
 }
 
-function randomIntPowerNegative(weight, max) {
+function randomIntPositive(weight, max,min = 0) {
     // 确保权重至少为1，避免0或负数权重造成问题
     weight = Math.max(1, weight);
     // 生成一个0到1之间的随机数，然后通过权重调整其分布
     let rand = Math.pow(Math.random(), 1 / weight);
     // 将调整后的随机数映射到指定的范围内（0到max）
-    return Math.floor(rand * max);
+    return Math.max(min, Math.min(Math.floor(rand * max), max))
 }

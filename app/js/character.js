@@ -110,7 +110,7 @@ function setHair() {
 
 /** 设置身高和单位，以及身体特征 */
 function setBody() {
-    Character.body.height = randomIntPowerPositive(Character.age);
+    Character.body.height = randomIntPositive(Character.age,heightMAX,heightMIN);
     Character.body.unit = "Cm";
     if (Character.race.size === 'huge') {
         Character.body.unit = "M";
@@ -216,7 +216,7 @@ function setPower() {
     let strength = Character.power.strength.level;
 
     // 设置体质
-    let const_flag = randomIntPowerNegative(Character.power.strength.level, 100);
+    let const_flag = randomIntPositive(Character.power.strength.level, 100);
     if (const_flag > 80) {
         let constitution = db.power.constitution;
         constitution = getDataRound(constitution)
