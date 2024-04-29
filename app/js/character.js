@@ -201,10 +201,10 @@ function setDisposition() {
     var desc_flag = randomInt(2);
     let disposition = db.disposition;
     Character.disposition.name = dis_flag === 0 ? getDataRound(disposition.good, true) : getDataRound(disposition.bad, true);// 性格
-    Character.disposition.but = dis_flag !== desc_flag;// 又但
+    Character.disposition.but = dis_flag !== desc_flag;// 又 但
     Character.disposition.desc = desc_flag === 0 ? getDataRound(disposition.goodDesc, true) : getDataRound(disposition.badDesc, true);// 解释
     if (randomInt(100) <= 7)
-        Character.disposition.however = desc_flag === 0 ? getDataRound(disposition.goodHowever, true) : getDataRound(disposition.badHowever, true);// 只不过
+        Character.disposition.however = Character.disposition.but ? getDataRound(disposition.goodHowever, true) : getDataRound(disposition.badHowever, true);// 只不过
 
     // 爱好目标
     Character.disposition.hobby = getDataRound(disposition.hobby, true);
