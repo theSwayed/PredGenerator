@@ -251,9 +251,13 @@ function getPoseTags() {
 
 function getLensesTags() {
     let tags = [];
-    let tagKeys = ["lenses",]
-    for (let i in tagKeys) {
-        tags.push(getTrans(db.background[tagKeys[i]]))
+    if(bare_foot){
+        tags.push("foot_focus")
+    }else{
+        let tagKeys = ["lenses",]
+        for (let i in tagKeys) {
+            tags.push(getTrans(db.background[tagKeys[i]]))
+        }
     }
     return tags.join(",")
 }
