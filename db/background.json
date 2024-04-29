@@ -23,7 +23,7 @@
         {"name": "暗锁法", "trans": "chain ring,dark chain, darkside, night, deep dark, darkness, ((dark clouds)),shadow"},
         {"name": "火烧云", "trans": "beautiful detailed glow, floating ashes, beautiful and detailed explosion, red moon, fire, fire cloud, a cloudy sky, smoke of gunpowder, burning, black dress, dove of peace, (floating cloud:1.2)"},
         {"name": "城堡法", "trans": "beautiful detailed glow, detailed ice, beautiful detailed water, (magic circle:1.2), (floating palaces:1.3)"},
-        {"name": "黄昏法", "trans": "(water bloom), (delicate glow), (breeze), long Flowers meadow,(((sunset)), (less stars form a circle), randomly distributed clouds, (rivers), (willows with branches falling into the water)"},
+        {"name": "黄昏法", "trans": "(water bloom), (delicate glow), (breeze), long Flowers meadow,((sunset)), (less stars form a circle), randomly distributed clouds, (rivers), (willows with branches falling into the water)"},
         {"name": "泡泡法", "trans": "((colorful bubble)),(floating),detailed light"},
         {"name": "蔷薇法", "trans": "((rose)), (vine), cage, bandage, red rope, (detail light), falling rose petals"},
         {"name": "星空法", "trans": "(starry tornado:1.4), starry Nebula, beautiful detailed sky"},
